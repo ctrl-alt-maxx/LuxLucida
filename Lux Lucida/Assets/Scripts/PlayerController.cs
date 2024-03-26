@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -10,10 +11,15 @@ public class PlayerController : MonoBehaviour
     private Animator AnimatorPlayer;
     private Rigidbody2D Rigidbody;
 
-    private float ControleX;
-    private float ControleY;
+    private float controleX;
+    private float controleY;
+    private bool isGrounded;
 
-    private float QuantiteForce = 5 ;
+
+    [SerializeField]
+    private float walkingSpeed = 5;
+    [SerializeField]
+    private float jumpForce = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,23 +29,24 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ControleX = Input.GetAxis("Horizontal");
-        AnimatorPlayer.SetFloat("MouvementX", ControleX);
-        ControleY = Input.GetAxis("Vertical");
+        controleX = Input.GetAxis("Horizontal");
+        controleY = Input.GetAxis("Vertical");
+        isGrounded = (Rigidbody.velocity.y == 0);
+        
+        AnimatorPlayer.SetFloat("MouvementX", controleX);
 
-        Vector2 direction = new Vector2(ControleX, 0);
+        Vector2 direction = new Vector2(controleX, 0);
+        float Vitesse = direction.magnitude;
 
-        if (direction.magnitude > 0.01)
-        {
-            //ds
-        }
-
-        float Vitesse = Rigidbody.velocity.magnitude;
         AnimatorPlayer.SetFloat("Vitesse", Vitesse);
     }
 
     private void FixedUpdate()
-    {
-        Rigidbody.AddForce(new Vector2(ControleX, 0) * QuantiteForce);
+    {   
+        Rigidbody.velocity = new Vector2(controleX * walkingSpeed, Rigidbody.velocity.y);
+        if (isGrounded && Input.GetKey("space"))
+        {
+            Rigidbody.AddForce(new Vector2(0, jumpForce));
+        }
     }
 }
