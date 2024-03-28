@@ -1,0 +1,7 @@
+Pour lancer le logiciel, double cliquer sur LuxLucida.exe
+
+Controles:
+
+- A et D pour bouger de gauche a droite
+- ESPACE pour sauter
+- Q pour toggle on/off le mode éclairé et le mode obscurci des platformes (Ce feature sert seulement de démonstration et ne sera pas dans le jeu)
