@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-[RequireComponent(typeof(Transform), typeof(Collider2D))]
+[RequireComponent(typeof(Transform))]
 public class player3DAsset : MonoBehaviour
 {
     [SerializeField]

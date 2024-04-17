@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     {
         controleX = Input.GetAxis("Horizontal");
         controleY = Input.GetAxis("Vertical");
-        isGrounded = (Rigidbody.velocity.y == 0);
+        
         
         AnimatorPlayer.SetFloat("MouvementX", controleX);
 
@@ -43,9 +43,12 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {   
         Rigidbody.velocity = new Vector2(controleX * walkingSpeed, Rigidbody.velocity.y);
+        isGrounded = (Mathf.Abs(Rigidbody.velocity.y) <= 0.01);
         if (isGrounded && Input.GetKey("space"))
         {
             Rigidbody.AddForce(new Vector2(0, jumpForce));
+            isGrounded = false;
         }
+        
     }
 }
