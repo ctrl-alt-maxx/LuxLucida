@@ -171,7 +171,7 @@ Transform:
   - {fileID: 3562848191706671173}
   - {fileID: 1661353977715473059}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1827488977775281850
 Rigidbody2D:
@@ -458,6 +458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 7132959610409006774}
   positionAdjuster: {x: 0, y: -0.88, z: 0}
+  _AdjustRotation: 1
 --- !u!95 &4750871509387731161 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: a7f12dffb11c4dc41a08b90375eeb709, type: 3}
