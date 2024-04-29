@@ -10,6 +10,8 @@ public class player3DAsset : MonoBehaviour
     private Transform playerTransform;
     [SerializeField]
     private Vector3 positionAdjuster;
+    [SerializeField]
+    private bool _AdjustRotation = true;
     private Vector3 lookingDirection = Vector3.right;
     
     private Transform player3DAssetTransform;
@@ -24,9 +26,18 @@ public class player3DAsset : MonoBehaviour
     void Update()
     {
         float controlX = Input.GetAxis("Horizontal");
+        
         lookingDirection = controlX < -0.001 ? Vector3.left : lookingDirection;
         lookingDirection = controlX > 0.001 ? Vector3.right : lookingDirection;
         player3DAssetTransform.position = playerTransform.localPosition + positionAdjuster;
-        player3DAssetTransform.rotation = Quaternion.LookRotation(lookingDirection);
+        if (_AdjustRotation)
+        {
+            player3DAssetTransform.rotation = Quaternion.LookRotation(lookingDirection);
+        }
+        else
+        {
+            player3DAssetTransform.rotation = playerTransform.localRotation;
+        }
+        
     }
 }

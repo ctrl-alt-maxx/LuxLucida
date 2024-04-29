@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private Animator AnimatorPlayer;
     private Rigidbody2D Rigidbody;
 
+
     private float controleX;
     private float controleY;
     private bool isGrounded;
@@ -51,4 +52,6 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+
+    
 }
