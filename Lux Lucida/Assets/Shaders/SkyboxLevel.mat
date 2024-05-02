@@ -50,15 +50,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _HorizonBlend: -0.31
+    - _HorizonBlend: 3.33
     - _NadirBlend: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _StarHeight: 415.2
     - _StarPower: 32.7
-    - _ZenithBlend: 1.9
+    - _ZenithBlend: 1
     m_Colors:
     - _BottomColor: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 0}
     - _Horizoncolor: {r: 0, g: 0.3552108, b: 0.3584906, a: 0}
-    - _TopColor: {r: 1, g: 1, b: 1, a: 0}
+    - _TopColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

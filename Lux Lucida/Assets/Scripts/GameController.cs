@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class GameController : MonoBehaviour
@@ -36,6 +38,12 @@ public class GameController : MonoBehaviour
         }
         _LevelProgressText.text = "Level is " + (percentProgress).ToString() + "% lit";
         _MainDirLight.intensity = (float)(((percentProgress/100.0f)) * (_MaxLightValue *1.33f)) - _MaxLightValue / 3.00f;
+
+        if ( percentProgress>= 100)
+        {
+            GameObject.Find("LevelController").GetComponent<levelController>().LastUnlockedLevel = 2;
+            SceneManager.LoadScene("SelectScene");
+        }
     }
 
 }

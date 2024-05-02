@@ -24,7 +24,7 @@ public class LevelPad : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int lastUnlockedLevel = _LevelController._LastUnlockedLevel;
+        int lastUnlockedLevel = _LevelController.LastUnlockedLevel;
         if(_level <= lastUnlockedLevel)
         {
             _Unlocked = true;

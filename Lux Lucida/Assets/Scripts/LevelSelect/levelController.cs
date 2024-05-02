@@ -27,7 +27,7 @@ public class levelController : MonoBehaviour
     private TMP_Text _NameTMP, _DescriptionTMP;
     [SerializeField]
     private GameObject _LevelInfoPanel;
-    public int _LastUnlockedLevel = 1;
+    public int LastUnlockedLevel = 1;
     private Level _SelectedLevel = null;
     // Start is called before the first frame update
     void Start()
@@ -35,6 +35,7 @@ public class levelController : MonoBehaviour
         levels.AddLast(new Level(1, "La valée sombre", "Ici ce débute votre quête pour illuminé le globe.", "LevelScene-0.0.1"));
         levels.AddLast(new Level(2, "Plaine crépuscule", "Je vois la lumiere au bout du tunnel", "deezNuts"));
         HideHUD();
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
