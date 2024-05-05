@@ -24,13 +24,15 @@ public class GameController : MonoBehaviour
     
     [SerializeField]
     private float _MaxLightValue=3;
+    [SerializeField]
+    private Inventory _Inventory;
     public int TotalLightCount = 0, LitLightCount = 0;
+
     
     // Start is called before the first frame update
     void Start()
-    {   
+    {
         _LevelProgressSlider = _LevelProgressSliderObject.GetComponent<Slider>();
-        Debug.Log(_LevelProgressSlider.value);
     }
 
     // Update is called once per frame
