@@ -38,7 +38,7 @@ public class LevelPad : MonoBehaviour
         _animator.SetBool("Lit", (_Unlocked || _Completed));
         if((_Unlocked || _Completed))
         {
-            Debug.Log("deez");
+        //s
         }
         _animator.SetBool("MoreLit", (_Touched || _Completed));
         _spotLightAnimator.SetBool("Lit", _Completed);

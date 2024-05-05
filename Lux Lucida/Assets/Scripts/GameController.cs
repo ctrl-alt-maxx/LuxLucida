@@ -8,6 +8,7 @@ using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -16,15 +17,20 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private TMP_Text _LevelProgressText;
     [SerializeField]
+    private GameObject _LevelProgressSliderObject;
+    private Slider _LevelProgressSlider;
+    [SerializeField]
     private Light _MainDirLight;
-
+    
     [SerializeField]
     private float _MaxLightValue=3;
     public int TotalLightCount = 0, LitLightCount = 0;
     
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        _LevelProgressSlider = _LevelProgressSliderObject.GetComponent<Slider>();
+        Debug.Log(_LevelProgressSlider.value);
     }
 
     // Update is called once per frame
@@ -36,14 +42,22 @@ public class GameController : MonoBehaviour
         {
             percentProgress = (int)(((float)LitLightCount / (float)TotalLightCount) * 100.0f);
         }
-        _LevelProgressText.text = "Level is " + (percentProgress).ToString() + "% lit";
-        _MainDirLight.intensity = (float)(((percentProgress/100.0f)) * (_MaxLightValue *1.33f)) - _MaxLightValue / 3.00f;
+        UpdateLightProgressHUD(percentProgress);
+
+
 
         if ( percentProgress>= 100)
         {
-            GameObject.Find("LevelController").GetComponent<levelController>().LastUnlockedLevel = 2;
+            //GameObject.Find("LevelController").GetComponent<levelController>().LastUnlockedLevel = 2;
             SceneManager.LoadScene("SelectScene");
         }
+    }
+    public void UpdateLightProgressHUD(int percent)
+    {
+        _LevelProgressText.text = "Level is " + (percent).ToString() + "% lit";
+        _MainDirLight.intensity = (float)(((percent / 100.0f)) * (_MaxLightValue * 1.33f)) - _MaxLightValue / 3.00f;
+        _LevelProgressSlider.value = percent;
+        
     }
 
 }
