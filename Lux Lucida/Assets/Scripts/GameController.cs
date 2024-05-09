@@ -33,6 +33,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         _LevelProgressSlider = _LevelProgressSliderObject.GetComponent<Slider>();
+        EventManager.TriggerEvent(EventManager.PossibleEvent.eStartDialogue, "Press a, d to move the player left to right\nPress C to close dialogue");
     }
 
     // Update is called once per frame
@@ -52,6 +53,12 @@ public class GameController : MonoBehaviour
         {
             //GameObject.Find("LevelController").GetComponent<levelController>().LastUnlockedLevel = 2;
             SceneManager.LoadScene("SelectScene");
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Debug.Log("c pressed");
+            EventManager.TriggerEvent(EventManager.PossibleEvent.eCloseDialogue, null);
         }
     }
     public void UpdateLightProgressHUD(int percent)
