@@ -3,22 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CapsuleCollider2D))]
 
 public class DeadAliveAi : MonoBehaviour
 {
 
-    
+    [SerializeField] private Animator AnimatorE;
     
     private CapsuleCollider2D capsuleCollider;
-    private Animator AnimatorE;
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
-        AnimatorE = GetComponent<Animator>();
+        
         capsuleCollider = GetComponent<CapsuleCollider2D>();
 
     }
@@ -33,7 +32,12 @@ public class DeadAliveAi : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            AnimatorE.
+            AnimatorE.SetBool("Dead", true);
         }
     }
+
+    public void Dies()
+    {
+        Destroy(gameObject.transform.parent.gameObject);
+    } 
 }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static System.Net.WebRequestMethods;
 
 //[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -18,6 +20,9 @@ public class EnnemiAi : MonoBehaviour
 
     [SerializeField]
     private float _DistanceVision = 5.0f;
+
+    [SerializeField]
+    private Transform _Transform3dModel;
 
     //private Animator _Animator;
     private Rigidbody2D _Rigidbody2D;
@@ -54,6 +59,15 @@ public class EnnemiAi : MonoBehaviour
 
         if (_EstEnChasse)
         {
+            bool estADroite = _DirectionVision.x > 0;
+            if (estADroite)
+            {
+                _Transform3dModel.rotation = Quaternion.LookRotation(Vector3.right);
+            }
+            else
+            {
+                _Transform3dModel.rotation = Quaternion.LookRotation(Vector3.left);
+            }
             //Vient de tomber en chasse
             if (!etaitEnChasse)
             {
@@ -65,6 +79,15 @@ public class EnnemiAi : MonoBehaviour
         }
         else
         {
+            if (_DirectionMouvement == Vector2.zero)
+            {
+                _Transform3dModel.rotation = Quaternion.LookRotation(Vector3.back);
+            }
+            else
+            {
+                _Transform3dModel.rotation = Quaternion.LookRotation(_DirectionMouvement);
+            }
+            
             //Il ne voit plus sa cible donc il est immobile
             if (etaitEnChasse)
             {
@@ -105,10 +128,12 @@ public class EnnemiAi : MonoBehaviour
             _DirectionMouvement = Vector2.zero;
             yield return new WaitForSeconds(2.0f); 
             _DirectionMouvement = new Vector2(1.0f,0.0f);
+            
             yield return new WaitForSeconds(1.0f);
             _DirectionMouvement = Vector2.zero;
             yield return new WaitForSeconds(2.0f);
             _DirectionMouvement = new Vector2(-1.0f, 0.0f);
+            
             yield return new WaitForSeconds(1.0f);
         }
     }
