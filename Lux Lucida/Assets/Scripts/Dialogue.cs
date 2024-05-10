@@ -33,6 +33,7 @@ public class Dialogue : MonoBehaviour
     }
     private void CloseDialogue(object _)
     {
+        Debug.Log("c pressed");
         this.enabled = false;
     }
 }

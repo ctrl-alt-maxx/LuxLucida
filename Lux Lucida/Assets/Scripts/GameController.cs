@@ -27,19 +27,24 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private Inventory _Inventory;
     public int TotalLightCount = 0, LitLightCount = 0;
+    private bool _FirstUpdate = true;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
         _LevelProgressSlider = _LevelProgressSliderObject.GetComponent<Slider>();
-        EventManager.TriggerEvent(EventManager.PossibleEvent.eStartDialogue, "Press a, d to move the player left to right\nPress C to close dialogue");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(_FirstUpdate)
+        {
+            
+        }
+        
         int percentProgress = 0;
         if (TotalLightCount > 0)
         {
@@ -57,9 +62,9 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            Debug.Log("c pressed");
             EventManager.TriggerEvent(EventManager.PossibleEvent.eCloseDialogue, null);
         }
+        _FirstUpdate = false;
     }
     public void UpdateLightProgressHUD(int percent)
     {
