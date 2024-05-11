@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
     private float _MaxLightValue=3;
     [SerializeField]
     private Inventory _Inventory;
-    public int TotalLightCount = 0, LitLightCount = 0;
+    public int TotalLightCount = 0, LitLightCount = 0, PercentProgress = 0;
     private bool _FirstUpdate = true;
 
 
@@ -45,25 +45,22 @@ public class GameController : MonoBehaviour
             
         }
         
-        int percentProgress = 0;
+        
         if (TotalLightCount > 0)
         {
-            percentProgress = (int)(((float)LitLightCount / (float)TotalLightCount) * 100.0f);
+            PercentProgress = (int)(((float)LitLightCount / (float)TotalLightCount) * 100.0f);
         }
-        UpdateLightProgressHUD(percentProgress);
+        UpdateLightProgressHUD(PercentProgress);
 
 
 
-        if ( percentProgress>= 100)
+        if (PercentProgress >= 100)
         {
             //GameObject.Find("LevelController").GetComponent<levelController>().LastUnlockedLevel = 2;
             SceneManager.LoadScene("SelectScene");
         }
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            EventManager.TriggerEvent(EventManager.PossibleEvent.eCloseDialogue, null);
-        }
+        
         _FirstUpdate = false;
     }
     public void UpdateLightProgressHUD(int percent)
