@@ -32,7 +32,11 @@ public class EnnemiAi : MonoBehaviour
 
     [SerializeField]
     private GameObject _DeathVFX;
-    
+
+    [SerializeField]
+    private GameObject _LightVFX;
+
+
     private Animator _AnimatorE;
  
     private Rigidbody2D _Rigidbody2D;
@@ -167,8 +171,11 @@ public class EnnemiAi : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             _AnimatorE.SetBool("Attacking", true);
-        }
+            _LightVFX.SetActive(true);  
             
+
+        }
+
     }
 
     public void OnCollisionExit2D(Collision2D collision)
@@ -176,6 +183,7 @@ public class EnnemiAi : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             _AnimatorE.SetBool("Attacking", false);
+            _LightVFX.SetActive(false);
         }
     }
 }

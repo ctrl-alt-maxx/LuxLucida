@@ -20,6 +20,9 @@ public class FlyingEnnemiAi : MonoBehaviour
     [SerializeField]
     private float _LongueurMouvement = 2.0f;
 
+    [SerializeField]
+    private GameObject _DeathVFX;
+
     Vector2 _DirectionMouvement;
 
     IEnumerator _Errer;
@@ -80,6 +83,8 @@ public class FlyingEnnemiAi : MonoBehaviour
 
     public void Dies()
     {
+        Instantiate(_DeathVFX, gameObject.transform.position, Quaternion.identity);
         Destroy(gameObject);
+        StopCoroutine(_Errer);
     }
 }
