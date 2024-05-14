@@ -2565,6 +2565,10 @@ PrefabInstance:
       value: 0.000000029802326
       objectReference: {fileID: 0}
     - target: {fileID: 3534517801565389598, guid: 694b065b2bc3b9f4b97286a397ccfc8d, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3534517801565389598, guid: 694b065b2bc3b9f4b97286a397ccfc8d, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
