@@ -18,6 +18,7 @@ public class EyesOfRa : MonoBehaviour
     private GameObject _EyesOfRaObject;
     [SerializeField]
     private TMP_Text _BatteryText;
+    private Animator _ZoneAnimator;
     private Image _BackgroundPanel;
     private bool _IsActive=false;
     // Start is called before the first frame update
@@ -26,7 +27,8 @@ public class EyesOfRa : MonoBehaviour
         _CurrentBatteryValue = _MaxBatteryValue;
         _BatterySlider.minValue = 0.0f;
         _BatterySlider.maxValue = _MaxBatteryValue;
-        _BackgroundPanel = GetComponent<Image>();   
+        _BackgroundPanel = GetComponent<Image>();
+        _ZoneAnimator = _EyesOfRaObject.GetComponent<Animator>();   
 
     }
 
@@ -52,16 +54,17 @@ public class EyesOfRa : MonoBehaviour
             }
         }
     }
+    
 
     public void TurnOn()
     {
-        _EyesOfRaObject.SetActive(true);
+        _ZoneAnimator.SetBool("Opened", true);
         _BackgroundPanel.color = new Color(1, 1, 1, (147.0f / 255.0f));
 
     }
     public void TurnOff()
     {
-        _EyesOfRaObject.SetActive(false);
+        _ZoneAnimator.SetBool("Opened", false);
         _BackgroundPanel.color = new Color(0.15f, 0.15f, 0.15f, (147.0f / 255.0f));
     }
 }

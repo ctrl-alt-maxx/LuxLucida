@@ -28,7 +28,7 @@ public class GroundLight : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (LayerMask.LayerToName(collision.gameObject.layer)  == "LightActivator" && !_IsLit) {
             _Animator.SetBool("Lit", true);
@@ -38,11 +38,5 @@ public class GroundLight : MonoBehaviour
         }
 
     }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (LayerMask.LayerToName(collision.gameObject.layer) == "LightActivator" && _IsLit)
-        {
-            //_Animator.SetBool("Lit", false);
-        }
-    }
+   
 }
