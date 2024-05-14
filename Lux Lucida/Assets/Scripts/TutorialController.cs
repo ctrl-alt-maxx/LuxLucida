@@ -34,7 +34,7 @@ public class TutorialController : MonoBehaviour
         
         if (_FirstUpdate)
         {
-            EventManager.TriggerEvent(EventManager.PossibleEvent.eStartDialogue, "Press the A or D keys to walk left to right");
+            EventManager.TriggerEvent(EventManager.PossibleEvent.eStartDialogue, "Press the [ A ] or [ D ] keys to walk left to right");
             _FirstUpdate = false;
         }
 
@@ -66,7 +66,7 @@ public class TutorialController : MonoBehaviour
         }
         if (ZonePlayerJump.PlayerIsInZone) {  
             _TutorialStep = TutorialStep.PlayerJump;
-            EventManager.TriggerEvent(EventManager.PossibleEvent.eStartDialogue, "Press the SPACEBAR to jump.");
+            EventManager.TriggerEvent(EventManager.PossibleEvent.eStartDialogue, "Press the [ SPACEBAR ] to jump.");
         }
         
     }
@@ -78,7 +78,7 @@ public class TutorialController : MonoBehaviour
         }
         if (ZoneEyesOfRa.PlayerIsInZone) { 
             _TutorialStep = TutorialStep.EyesOfRa;
-            string dialogueText = "You have the Eyes of Ra.\n They are a powerfull light source that you will have to use to complete your quest in lighting up the globe.\n Press Q to activate/deactivate your glowing eyes.";
+            string dialogueText = "You have the Eyes of Ra.\n They are a powerfull light source that you will have to use to complete your quest in lighting up the globe.\n Press [ Q ] to activate/deactivate your glowing eyes.";
             EventManager.TriggerEvent(EventManager.PossibleEvent.eStartDialogue, dialogueText);
         }
 
@@ -90,7 +90,7 @@ public class TutorialController : MonoBehaviour
             EventManager.TriggerEvent(EventManager.PossibleEvent.eCloseDialogue, null);
         }
         if (_GameController.PercentProgress > 25) { 
-            string dialogueText = "To complete the level you need to light up 100% of the ground and objects that are darkened in the level.\n The bar in the top will help you keep track how much more there is to do in the level. \n\n But be carefull! Your powers are limited\n In the bottom right of the screen you can see how much energy you have left in your eyes.";
+            string dialogueText = "To complete the level you need to light up 100% of the ground and objects that are darkened in the level.\n The bar in the top will help you keep track how much more there is to do in the level. \n\n But be carefull! Your powers are limited\n In the bottom right of the screen you can see how much energy you have left in your eyes.\n\nHold [ R ] to restart level.";
             _TutorialStep = TutorialStep.LevelProgress;
             EventManager.TriggerEvent(EventManager.PossibleEvent.eStartDialogue, dialogueText);
 

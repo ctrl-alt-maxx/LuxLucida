@@ -11,7 +11,7 @@ public class EventManager : MonoBehaviour
     {
         eStartDialogue = 0,
         eCloseDialogue = 1,
-        
+        eRestartLevel = 2,
         //////////////
         eMAX
     }

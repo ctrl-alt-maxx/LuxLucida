@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,41 +31,47 @@ public class GameController : MonoBehaviour
     public int TotalLightCount = 0, LitLightCount = 0, PercentProgress = 0;
     [SerializeField]
     private GameState _GameState;
-    private bool _FirstUpdate = true;
+
+    private UnityAction<object> _RestartLevel;
+    private float _TimeR;
 
 
     // Start is called before the first frame update
     void Start()
     {
         _LevelProgressSlider = _LevelProgressSliderObject.GetComponent<Slider>();
-        
+        _RestartLevel = RestartLevel;
+        EventManager.StartListening(EventManager.PossibleEvent.eRestartLevel, _RestartLevel);   
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(_FirstUpdate)
-        {
-            
-        }
-        
+  
         
         if (TotalLightCount > 0)
         {
             PercentProgress = (int)(((float)LitLightCount / (float)TotalLightCount) * 100.0f);
         }
+
         UpdateLightProgressHUD(PercentProgress);
 
-
+        if(Input.GetKey(KeyCode.R))
+        {
+            if(Input.GetKeyDown(KeyCode.R)) {
+                _TimeR = 0;
+            }
+            _TimeR += Time.deltaTime;
+            if(_TimeR > 2) {
+                EventManager.TriggerEvent(EventManager.PossibleEvent.eRestartLevel, null);
+            }
+        }
 
         if (PercentProgress >= 100)
         {
             _GameState.NextLevel++;
             SceneManager.LoadScene("SelectScene");
         }
-
-        
-        _FirstUpdate = false;
     }
     public void UpdateLightProgressHUD(int percent)
     {
@@ -72,6 +79,11 @@ public class GameController : MonoBehaviour
         _MainDirLight.intensity = (float)(((percent / 100.0f)) * (_MaxLightValue * 1.33f)) - _MaxLightValue / 3.00f;
         _LevelProgressSlider.value = percent;
         
+    }
+
+    private void RestartLevel(object _)
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }

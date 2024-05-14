@@ -2034,6 +2034,7 @@ MonoBehaviour:
   _DescriptionTMP: {fileID: 1247134804}
   _LevelInfoPanel: {fileID: 346459999}
   _GameState: {fileID: 11400000, guid: 390a3e7c4e50b964f8a21fa84734f142, type: 2}
+  _PlayerTransform: {fileID: 1734494105}
   LastUnlockedLevel: 1
 --- !u!4 &1890959055
 Transform:
