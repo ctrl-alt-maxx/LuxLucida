@@ -24,10 +24,21 @@ public class EnnemiAi : MonoBehaviour
     [SerializeField]
     private Transform _Transform3dModel;
 
-    //private Animator _Animator;
+    [SerializeField]
+    private EnnemyHead _EnnemyHead;
+
+    [SerializeField]
+    private float _LongueurMouvement = 2.0f;
+
+    [SerializeField]
+    private GameObject _DeathVFX;
+    
+    private Animator _AnimatorE;
+ 
     private Rigidbody2D _Rigidbody2D;
 
     Vector2 _DirectionMouvement;
+  
 
     IEnumerator _Errer;
 
@@ -36,7 +47,7 @@ public class EnnemiAi : MonoBehaviour
     {
         //_Animator = GetComponent<Animator>();
         _Rigidbody2D = GetComponent<Rigidbody2D>();
-
+        _AnimatorE = gameObject.GetComponent<Animator>();
         _Errer = Errer();
         StartCoroutine(_Errer);
     }
@@ -74,6 +85,7 @@ public class EnnemiAi : MonoBehaviour
                 StopCoroutine(_Errer);
                 _Errer = Errer();
             }
+            
 
             _DirectionMouvement = _DirectionVision;
         }
@@ -96,20 +108,21 @@ public class EnnemiAi : MonoBehaviour
 
             //_DirectionMouvement = Vector2.zero; 
         }
+        if (_EnnemyHead.IsHit)
+        {
+            _AnimatorE.SetBool("Dead", true);
+            
+            
+        }
+
+        
 
         // Détermine sa vitesse et l'envoie à l'animateur pour déterminer si 
         // il fait l'animation de courir ou sur place et change aussi la direction de l'animation
         // dépendant de vers où il cours.
 
         float vitesse = _Rigidbody2D.velocity.magnitude;
-        //_Animator.SetFloat("Vitesse", vitesse);
-
-        //if (vitesse > 0.01f)
-        //{
-            //Vector2 directionAssainie = ForceAnimationVirtualJoystick.ForceDirectionAxe(_DirectionMouvement.x,0.0f);
-            //_Animator.SetFloat("MouvementX", directionAssainie.x);
-            //_Animator.SetFloat("MouvementY", directionAssainie.y);
-        //}
+       
     }
 
 
@@ -124,17 +137,45 @@ public class EnnemiAi : MonoBehaviour
     {
         while (true)
         {
-            //TODO: mettre valeur random pour le temps de mouvement
-            _DirectionMouvement = Vector2.zero;
-            yield return new WaitForSeconds(2.0f); 
-            _DirectionMouvement = new Vector2(1.0f,0.0f);
+
             
-            yield return new WaitForSeconds(1.0f);
+
             _DirectionMouvement = Vector2.zero;
-            yield return new WaitForSeconds(2.0f);
-            _DirectionMouvement = new Vector2(-1.0f, 0.0f);
-            
             yield return new WaitForSeconds(1.0f);
+            _DirectionMouvement = new Vector2(_LongueurMouvement, 0.0f);
+            yield return new WaitForSeconds(_LongueurMouvement);
+
+            _DirectionMouvement = Vector2.zero;
+            yield return new WaitForSeconds(1.0f);
+            _DirectionMouvement = new Vector2(-(_LongueurMouvement), 0.0f);
+            yield return new WaitForSeconds(_LongueurMouvement);
+
+
+
+        }
+    }
+
+    public void Dies()
+    {
+        Instantiate(_DeathVFX, gameObject.transform.position, Quaternion.identity);
+        Destroy(gameObject);
+        
+    }
+
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            _AnimatorE.SetBool("Attacking", true);
+        }
+            
+    }
+
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            _AnimatorE.SetBool("Attacking", false);
         }
     }
 }
