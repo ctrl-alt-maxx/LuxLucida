@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Events;
@@ -24,31 +25,51 @@ public class GameController : MonoBehaviour
     
     [SerializeField]
     private float _MaxLightValue=3;
-    public int TotalLightCount = 0, LitLightCount = 0;
-    
+    [SerializeField]
+    private Inventory _Inventory;
+    [SerializeField]
+    public int TotalLightCount = 0, LitLightCount = 0, PercentProgress = 0;
+    [SerializeField]
+    private GameState _GameState;
+
+    private UnityAction<object> _RestartLevel;
+    private float _TimeR;
+
+
     // Start is called before the first frame update
     void Start()
-    {   
+    {
         _LevelProgressSlider = _LevelProgressSliderObject.GetComponent<Slider>();
-        Debug.Log(_LevelProgressSlider.value);
+        _RestartLevel = RestartLevel;
+        EventManager.StartListening(EventManager.PossibleEvent.eRestartLevel, _RestartLevel);   
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        int percentProgress = 0;
+  
+        
         if (TotalLightCount > 0)
         {
-            percentProgress = (int)(((float)LitLightCount / (float)TotalLightCount) * 100.0f);
+            PercentProgress = (int)(((float)LitLightCount / (float)TotalLightCount) * 100.0f);
         }
-        UpdateLightProgressHUD(percentProgress);
 
+        UpdateLightProgressHUD(PercentProgress);
 
-
-        if ( percentProgress>= 100)
+        if(Input.GetKey(KeyCode.R))
         {
-            //GameObject.Find("LevelController").GetComponent<levelController>().LastUnlockedLevel = 2;
+            if(Input.GetKeyDown(KeyCode.R)) {
+                _TimeR = 0;
+            }
+            _TimeR += Time.deltaTime;
+            if(_TimeR > 2) {
+                EventManager.TriggerEvent(EventManager.PossibleEvent.eRestartLevel, null);
+            }
+        }
+
+        if (PercentProgress >= 100)
+        {
+            _GameState.NextLevel++;
             SceneManager.LoadScene("SelectScene");
         }
     }
@@ -58,6 +79,11 @@ public class GameController : MonoBehaviour
         _MainDirLight.intensity = (float)(((percent / 100.0f)) * (_MaxLightValue * 1.33f)) - _MaxLightValue / 3.00f;
         _LevelProgressSlider.value = percent;
         
+    }
+
+    private void RestartLevel(object _)
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }

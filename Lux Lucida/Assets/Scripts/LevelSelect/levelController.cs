@@ -21,17 +21,22 @@ public class Level
 }
 public class levelController : MonoBehaviour
 {
-    [SerializeField]
     private LinkedList<Level> levels = new LinkedList<Level>();
     [SerializeField]
     private TMP_Text _NameTMP, _DescriptionTMP;
     [SerializeField]
     private GameObject _LevelInfoPanel;
-    public int LastUnlockedLevel = 1;
+    [SerializeField]
+    private GameState _GameState;
+    [SerializeField]
+    private Transform _PlayerTransform;
+    public int LastUnlockedLevel;
     private Level _SelectedLevel = null;
     // Start is called before the first frame update
     void Start()
-    {   
+    {
+        LastUnlockedLevel = _GameState.NextLevel;
+        _PlayerTransform.position = _GameState.PlayerPosition;
         levels.AddLast(new Level(1, "La valée sombre", "Ici ce débute votre quête pour illuminé le globe.", "LevelScene-0.0.1"));
         levels.AddLast(new Level(2, "Plaine crépuscule", "Je vois la lumiere au bout du tunnel", "deezNuts"));
         HideHUD();
@@ -47,7 +52,7 @@ public class levelController : MonoBehaviour
     public void ShowHUD()
     {
         _LevelInfoPanel.SetActive(true);
-        _NameTMP.text = "Level" + _SelectedLevel.name;
+        _NameTMP.text = "Level " + _SelectedLevel.level.ToString() + ": "  + _SelectedLevel.name;
         _DescriptionTMP.text = _SelectedLevel.description;
     }
     public void HideHUD()
@@ -66,8 +71,8 @@ public class levelController : MonoBehaviour
 
     public void StartLevel(int level)
     {
-        Debug.Log(level);
         SceneManager.LoadScene(_SelectedLevel.sceneName);
+        _GameState.PlayerPosition = _PlayerTransform.position;
     }
 
 }

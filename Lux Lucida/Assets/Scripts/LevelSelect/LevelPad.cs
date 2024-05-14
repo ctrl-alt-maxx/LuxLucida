@@ -54,7 +54,7 @@ public class LevelPad : MonoBehaviour
         }
     }
     private void OnCollisionStay(Collision collision) {
-        if (_Unlocked && Input.GetKeyDown(KeyCode.E))
+        if (_Unlocked && Input.GetKey(KeyCode.E))
         {
            
            

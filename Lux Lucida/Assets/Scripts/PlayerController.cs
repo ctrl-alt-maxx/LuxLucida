@@ -58,8 +58,10 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.layer == LayerMask.NameToLayer("Killzone"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            EventManager.TriggerEvent(EventManager.PossibleEvent.eRestartLevel, null);
         }
     }
+
+
 
 }

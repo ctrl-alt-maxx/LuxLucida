@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0024008406, g: 0.0023750206, b: 0.002339241, a: 1}
+  m_IndirectSpecularColor: {r: 0.0024008795, g: 0.00237505, b: 0.002339264, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -355,7 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf25e8ad3762bd439d493bbd794e169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: 5
+  gravity: 2
 --- !u!95 &93842309 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 4430752043326821638, guid: d20aaf8b0c9d30040829ac60f14b09ab, type: 3}
@@ -1083,6 +1083,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d20aaf8b0c9d30040829ac60f14b09ab, type: 3}
+--- !u!1 &576309235
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 576309237}
+  - component: {fileID: 576309236}
+  m_Layer: 0
+  m_Name: EventManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &576309236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576309235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 702e972087c6c5d42bb179f1085289f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &576309237
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576309235}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2435.215, y: 69.59935, z: -23.580332}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &790358366 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 4430752043326821638, guid: d20aaf8b0c9d30040829ac60f14b09ab, type: 3}
@@ -1717,7 +1761,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1734494101}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02, y: -0.36, z: 40.39}
+  m_LocalPosition: {x: 0.02, y: -0.36, z: 27.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1751,7 +1795,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 32
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &1734494107
 MonoBehaviour:
@@ -1767,8 +1811,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Animator: {fileID: 356606047}
   _GravityArea: {fileID: 30470682}
-  _MoveSpeed: 5
-  _JumpForce: 500
+  _MoveSpeed: 7
+  _JumpForce: 700
   _Transform3DModel: {fileID: 356606045}
   _Adjustments: {x: 0, y: 0, z: 0}
 --- !u!1 &1809473856
@@ -1989,7 +2033,9 @@ MonoBehaviour:
   _NameTMP: {fileID: 106971930}
   _DescriptionTMP: {fileID: 1247134804}
   _LevelInfoPanel: {fileID: 346459999}
-  _LastUnlockedLevel: 1
+  _GameState: {fileID: 11400000, guid: 390a3e7c4e50b964f8a21fa84734f142, type: 2}
+  _PlayerTransform: {fileID: 1734494105}
+  LastUnlockedLevel: 1
 --- !u!4 &1890959055
 Transform:
   m_ObjectHideFlags: 0
