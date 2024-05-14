@@ -4,13 +4,15 @@ using System.Collections;
 using System.Collections.Generic;
 using static Unity.VisualScripting.FlowStateWidget;
 
-public class EventManager : MonoBehaviour
+public class EventManagerLevelSelect : MonoBehaviour
 {
 
     public enum PossibleEvent
     {
-        eStartDialogue = 0,
-        eCloseDialogue = 1,
+        eChangeTitle = 1,
+        eChangeDescription = 2,
+        eShowHUD =3,
+        eHideHUD =4,    
         
         //////////////
         eMAX
@@ -18,15 +20,15 @@ public class EventManager : MonoBehaviour
 
     private List<UnityEvent<object>> eventList;
 
-    private static EventManager eventManager;
+    private static EventManagerLevelSelect eventManager;
 
-    public static EventManager instance
+    public static EventManagerLevelSelect instance
     {
         get
         {
             if (!eventManager)
             {
-                eventManager = FindObjectOfType(typeof(EventManager)) as EventManager;
+                eventManager = FindObjectOfType(typeof(EventManager)) as EventManagerLevelSelect;
 
                 if (!eventManager)
                 {

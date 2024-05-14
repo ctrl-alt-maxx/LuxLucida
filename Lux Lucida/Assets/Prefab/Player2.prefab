@@ -415,7 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnimatorPlayer: {fileID: 4750871509387731161}
   walkingSpeed: 5
-  jumpForce: 700
+  jumpForce: 850
 --- !u!70 &1927610778072463402
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

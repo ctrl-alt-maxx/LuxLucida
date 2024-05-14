@@ -26,7 +26,10 @@ public class GameController : MonoBehaviour
     private float _MaxLightValue=3;
     [SerializeField]
     private Inventory _Inventory;
+    [SerializeField]
     public int TotalLightCount = 0, LitLightCount = 0, PercentProgress = 0;
+    [SerializeField]
+    private GameState _GameState;
     private bool _FirstUpdate = true;
 
 
@@ -56,7 +59,7 @@ public class GameController : MonoBehaviour
 
         if (PercentProgress >= 100)
         {
-            //GameObject.Find("LevelController").GetComponent<levelController>().LastUnlockedLevel = 2;
+            _GameState.NextLevel++;
             SceneManager.LoadScene("SelectScene");
         }
 
