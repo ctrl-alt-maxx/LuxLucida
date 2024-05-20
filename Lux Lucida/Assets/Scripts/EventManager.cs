@@ -12,6 +12,10 @@ public class EventManager : MonoBehaviour
         eStartDialogue = 0,
         eCloseDialogue = 1,
         eRestartLevel = 2,
+        eOnLeverOn = 3,
+        eOnLeverOff = 4,
+        eShowHint = 5,
+        eHideHint = 6,
         //////////////
         eMAX
     }
