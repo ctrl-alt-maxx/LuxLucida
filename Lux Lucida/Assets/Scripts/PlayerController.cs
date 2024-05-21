@@ -1,23 +1,19 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private Animator AnimatorPlayer;
-    private Rigidbody2D Rigidbody;
-
+    private Animator _AnimatorPlayer;
+    private Rigidbody2D _Rigidbody;
+    private CapsuleCollider2D _Collider;
 
     private float controleX;
     private float controleY;
-    private bool isGrounded, _IsRunning = false;
+    private bool _IsGrounded, _IsRunning = false;
 
-
+    [SerializeField]
+    private float _DistanceRayCast = 0.5f;
     [SerializeField]
     private float walkingSpeed = 5, runningSpeed = 7;
     [SerializeField]
@@ -25,7 +21,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Rigidbody = GetComponent<Rigidbody2D>();
+        _Collider = GetComponent<CapsuleCollider2D>();
+        _Rigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -42,24 +39,28 @@ public class PlayerController : MonoBehaviour
             _IsRunning = false;
         }
 
-        AnimatorPlayer.SetFloat("MouvementX", controleX);
+        _AnimatorPlayer.SetFloat("MouvementX", controleX);
 
         Vector2 direction = new Vector2(controleX, 0);
         float Vitesse = direction.magnitude;
 
-        AnimatorPlayer.SetFloat("Vitesse", Vitesse);
+        _AnimatorPlayer.SetFloat("Vitesse", Vitesse);
     }
 
     private void FixedUpdate()
     {
        
-        Rigidbody.velocity = new Vector2(controleX * ((_IsRunning) ? runningSpeed: walkingSpeed), Rigidbody.velocity.y);
-        isGrounded = (Mathf.Abs(Rigidbody.velocity.y) <= 0.01);
-        if (isGrounded && Input.GetKey("space"))
+        _Rigidbody.velocity = new Vector2(controleX * ((_IsRunning) ? runningSpeed: walkingSpeed), _Rigidbody.velocity.y);
+
+       
+        CheckIfGrounded();
+        
+        if (_IsGrounded && Input.GetKey("space"))
         {
-            Rigidbody.AddForce(new Vector2(0, jumpForce));
-            isGrounded = false;
+            _Rigidbody.AddForce(new Vector2(0, jumpForce));
+            _IsGrounded = false;
         }
+        
         
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -69,7 +70,14 @@ public class PlayerController : MonoBehaviour
             EventManager.TriggerEvent(EventManager.PossibleEvent.eRestartLevel, null);
         }
     }
-
+    private void CheckIfGrounded()
+    {
+        int layerMask = LayerMask.GetMask(new[] { "Ground" });
+        Vector2 pointDebutRay = new Vector2(transform.position.x, _Collider.bounds.min.y);
+        RaycastHit2D hit = Physics2D.Raycast(pointDebutRay , Vector2.down, _DistanceRayCast, layerMask);
+        _IsGrounded = (hit.collider != null);
+        Debug.DrawRay(pointDebutRay, Vector2.down * _DistanceRayCast, _IsGrounded ? Color.green : Color.red);
+    }
 
 
 }

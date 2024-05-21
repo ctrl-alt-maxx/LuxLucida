@@ -5210,7 +5210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd5aed5361833d46a0a62567cceb2a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AnimatorPlayer: {fileID: 4750871509387731161}
+  _AnimatorPlayer: {fileID: 4750871509387731161}
   walkingSpeed: 5
   runningSpeed: 7
   jumpForce: 850
