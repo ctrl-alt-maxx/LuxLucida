@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TutorialZone : MonoBehaviour
 {
-    public bool PlayerIsInZone = false;
+    public bool PlayerWasInZone = false, PlayerJustEnteredZone = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,12 +16,18 @@ public class TutorialZone : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter2D()
+
+    private void OnTriggerStay2D()
     {
-        PlayerIsInZone = true;
+        if (!PlayerWasInZone)
+        {
+            PlayerJustEnteredZone = true;
+        }
+        else
+        {
+            PlayerJustEnteredZone = false;
+        }
+        PlayerWasInZone = true;
     }
-    private void OnTriggerExit2D()
-    {
-        PlayerIsInZone = false;
-    }
+
 }

@@ -11,9 +11,6 @@ public class MenuController : MonoBehaviour
     [SerializeField]
     private Canvas _MainCanvas, _AvatarCanvas, _OptionsCanvas;
 
-
-    private bool _IsGlobeDown = false;
-
     private void Start()
     {
         _OptionsCanvas.enabled = false;

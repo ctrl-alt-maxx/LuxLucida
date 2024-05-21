@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -38,7 +37,6 @@ public class Dialogue : MonoBehaviour
     }
     private void CloseDialogue(object _)
     {
-        Debug.Log("fgud");
         _Animator.SetBool("Hidden", true);
     }
 }

@@ -41,6 +41,8 @@ public class EnnemiAi : MonoBehaviour
  
     private Rigidbody2D _Rigidbody2D;
 
+    private bool _IsAttacking;
+
     Vector2 _DirectionMouvement;
   
 
@@ -118,7 +120,10 @@ public class EnnemiAi : MonoBehaviour
             
             
         }
-
+        if (_IsAttacking)
+        {
+            EventManager.TriggerEvent(EventManager.PossibleEvent.eLoseBattery, Time.deltaTime);
+        }
         
 
         // Détermine sa vitesse et l'envoie à l'animateur pour déterminer si 
@@ -170,8 +175,13 @@ public class EnnemiAi : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            _AnimatorE.SetBool("Attacking", true);
-            _LightVFX.SetActive(true);  
+            if (!_EnnemyHead.IsHit)
+            {
+                _AnimatorE.SetBool("Attacking", true);
+                _LightVFX.SetActive(true);
+                _IsAttacking = true; 
+            }
+            
             
 
         }
@@ -184,6 +194,7 @@ public class EnnemiAi : MonoBehaviour
         {
             _AnimatorE.SetBool("Attacking", false);
             _LightVFX.SetActive(false);
+            _IsAttacking = false;
         }
     }
 }

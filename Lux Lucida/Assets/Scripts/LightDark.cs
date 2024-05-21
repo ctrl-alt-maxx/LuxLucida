@@ -5,10 +5,12 @@ using UnityEngine;
 public class LightDark : MonoBehaviour
 {
     private Material _Material;
+    private GroundLight _Light;
     // Start is called before the first frame update
     void Start()
     {
         _Material = gameObject.GetComponent<Renderer>().material;
+        _Light = GetComponentInChildren<GroundLight>(); 
         lightClose();
     }
 
@@ -24,5 +26,16 @@ public class LightDark : MonoBehaviour
     public void lightClose()
     {
         _Material.SetFloat("_Saturation", 0);
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Ennemi"))
+        {
+            if (_Light.IsLit)
+            {
+                _Light.DarkenUp();
+                lightClose();
+            }
+        }
     }
 }

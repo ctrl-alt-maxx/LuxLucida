@@ -8,7 +8,7 @@ public class GroundLight : MonoBehaviour
     private Animator _Animator;
     private GameController _GameController;
     private LightDark _ObjectScript;
-    private bool _IsLit = false;
+    public bool IsLit = false;
     private Material _ParentMaterial;
     
     // Start is called before the first frame update
@@ -27,13 +27,23 @@ public class GroundLight : MonoBehaviour
     {
         
     }
+    public void LightUp()
+    {
+        _Animator.SetBool("Lit", true);
+        _GameController.LitLightCount++;
+        IsLit = true;
+    }
+    public void DarkenUp()
+    {
+        _Animator.SetBool("Lit", false);
+        _GameController.LitLightCount--;
+        IsLit = false;
+    }
 
     private void OnCollisionStay(Collision collision)
     {
-        if (LayerMask.LayerToName(collision.gameObject.layer)  == "LightActivator" && !_IsLit) {
-            _Animator.SetBool("Lit", true);
-            _GameController.LitLightCount++;
-            _IsLit = true;
+        if (LayerMask.LayerToName(collision.gameObject.layer)  == "LightActivator" && !IsLit) {
+            LightUp();
             _ObjectScript.lightOpen();
         }
 
