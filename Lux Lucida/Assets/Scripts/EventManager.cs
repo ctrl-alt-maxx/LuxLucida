@@ -16,6 +16,9 @@ public class EventManager : MonoBehaviour
         eOnLeverOff = 4,
         eShowHint = 5,
         eHideHint = 6,
+        ePickupKey = 7,
+        eUseKey = 8,
+        eDoesPlayerHaveKey = 9,
         //////////////
         eMAX
     }
