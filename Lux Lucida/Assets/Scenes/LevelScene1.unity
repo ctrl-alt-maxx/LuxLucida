@@ -6804,6 +6804,7 @@ MonoBehaviour:
   _ZonePlayerSprint: {fileID: 435684851}
   _ZoneKey: {fileID: 268490969}
   _ZoneDoor: {fileID: 642326466}
+  _ZoneEnnemies: {fileID: 0}
 --- !u!1 &604977934
 GameObject:
   m_ObjectHideFlags: 0
@@ -11066,7 +11067,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 320, y: 400}
+  m_AnchoredPosition: {x: 480, y: 540}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &983239788
@@ -23811,11 +23812,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8951564446558489595, guid: 31e06dcaff68c3c4c8467a12ab75e0d4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 62.671
+      value: 62.382
       objectReference: {fileID: 0}
     - target: {fileID: 8951564446558489595, guid: 31e06dcaff68c3c4c8467a12ab75e0d4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20.548
+      value: -20.223
       objectReference: {fileID: 0}
     - target: {fileID: 8951564446558489595, guid: 31e06dcaff68c3c4c8467a12ab75e0d4, type: 3}
       propertyPath: m_LocalRotation.w
