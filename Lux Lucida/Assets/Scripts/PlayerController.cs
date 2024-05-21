@@ -15,11 +15,11 @@ public class PlayerController : MonoBehaviour
 
     private float controleX;
     private float controleY;
-    private bool isGrounded;
+    private bool isGrounded, _IsRunning = false;
 
 
     [SerializeField]
-    private float walkingSpeed = 5;
+    private float walkingSpeed = 5, runningSpeed = 7;
     [SerializeField]
     private float jumpForce = 5;
     // Start is called before the first frame update
@@ -33,8 +33,15 @@ public class PlayerController : MonoBehaviour
     {
         controleX = Input.GetAxis("Horizontal");
         controleY = Input.GetAxis("Vertical");
-        
-        
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            _IsRunning = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _IsRunning = false;
+        }
+
         AnimatorPlayer.SetFloat("MouvementX", controleX);
 
         Vector2 direction = new Vector2(controleX, 0);
@@ -44,8 +51,9 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {   
-        Rigidbody.velocity = new Vector2(controleX * walkingSpeed, Rigidbody.velocity.y);
+    {
+       
+        Rigidbody.velocity = new Vector2(controleX * ((_IsRunning) ? runningSpeed: walkingSpeed), Rigidbody.velocity.y);
         isGrounded = (Mathf.Abs(Rigidbody.velocity.y) <= 0.01);
         if (isGrounded && Input.GetKey("space"))
         {
