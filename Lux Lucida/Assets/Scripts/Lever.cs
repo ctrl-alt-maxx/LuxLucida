@@ -6,7 +6,10 @@ public class Lever : MonoBehaviour
 {
     [SerializeField]
     private int _LeverId;
-    private bool _IsOn = false;
+    [SerializeField]
+    private Animator _Animator;
+    private bool _IsOn = false, _PlayerIsNear = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -16,20 +19,12 @@ public class Lever : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        EventManager.TriggerEvent(EventManager.PossibleEvent.eShowHint, "Press [ E ] to interact with lever");
-        Debug.Log("enter");
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (_PlayerIsNear)
         {
             if (Input.GetKeyDown(KeyCode.E))
-            {   
-                if(!_IsOn) {
+            {
+                if (!_IsOn)
+                {
                     EventManager.TriggerEvent(EventManager.PossibleEvent.eOnLeverOn, _LeverId);
                 }
                 else
@@ -37,12 +32,26 @@ public class Lever : MonoBehaviour
                     EventManager.TriggerEvent(EventManager.PossibleEvent.eOnLeverOff, _LeverId);
                 }
                 _IsOn = !_IsOn;
+                _Animator.SetBool("LeverOn", _IsOn);
             }
-
         }
+        
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            EventManager.TriggerEvent(EventManager.PossibleEvent.eShowHint, "Press [ E ] to interact");
+            _PlayerIsNear = true;
+        }
+        
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        EventManager.TriggerEvent(EventManager.PossibleEvent.eShowHint, null);
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            EventManager.TriggerEvent(EventManager.PossibleEvent.eHideHint, null);
+            _PlayerIsNear = false;
+        }
     }
 }

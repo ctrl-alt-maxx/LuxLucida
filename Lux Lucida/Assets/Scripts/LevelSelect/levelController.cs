@@ -11,11 +11,11 @@ public class Level
 {
     public int level;
     public string name, description, sceneName;
-    public Level(int levelNumber, string _name, string _description, string _sceneName) { 
+    public Level(int levelNumber, string _name, string _description) { 
         level = levelNumber;
         name = _name;
         description = _description;
-        sceneName = _sceneName;
+        sceneName = "LevelScene" + (level).ToString();
     }
 
 }
@@ -37,8 +37,8 @@ public class levelController : MonoBehaviour
     {
         LastUnlockedLevel = _GameState.NextLevel;
         _PlayerTransform.position = _GameState.PlayerPosition;
-        levels.AddLast(new Level(1, "La valée sombre", "Ici ce débute votre quête pour illuminé le globe.", "LevelScene-0.0.1"));
-        levels.AddLast(new Level(2, "Plaine crépuscule", "Je vois la lumiere au bout du tunnel", "deezNuts"));
+        levels.AddLast(new Level(1, "La valée sombre", "Ici ce débute votre quête pour illuminé le globe."));
+        levels.AddLast(new Level(2, "Plaine crépuscule", "Je vois la lumiere au bout du tunnel"));
         HideHUD();
         DontDestroyOnLoad(gameObject);
     }

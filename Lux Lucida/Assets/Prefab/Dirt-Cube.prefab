@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2022118982652448068}
   - component: {fileID: 1479361906033347758}
   - component: {fileID: 9044115088975870448}
-  - component: {fileID: 4171595230556224239}
   - component: {fileID: 3691912595715624039}
   m_Layer: 7
   m_Name: Dirt-Cube
@@ -30,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902560061160360600}
   m_LocalRotation: {x: -0.040007874, y: -0.0035949624, z: 0.0006996001, w: 0.99919266}
-  m_LocalPosition: {x: -7.1198, y: -2.2241, z: -0.4903}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -160,27 +159,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!95 &4171595230556224239
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 902560061160360600}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3691912595715624039
 MonoBehaviour:
   m_ObjectHideFlags: 0
