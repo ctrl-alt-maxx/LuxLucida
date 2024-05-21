@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
@@ -21,6 +22,7 @@ public class EyesOfRa : MonoBehaviour
     private Animator _ZoneAnimator;
     private Image _BackgroundPanel;
     private bool _IsActive=false;
+    private UnityAction<object> _LoseBattery;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +30,10 @@ public class EyesOfRa : MonoBehaviour
         _BatterySlider.minValue = 0.0f;
         _BatterySlider.maxValue = _MaxBatteryValue;
         _BackgroundPanel = GetComponent<Image>();
-        _ZoneAnimator = _EyesOfRaObject.GetComponent<Animator>();   
+        _ZoneAnimator = _EyesOfRaObject.GetComponent<Animator>();
+
+        _LoseBattery = LoseBattery;
+        EventManager.StartListening(EventManager.PossibleEvent.eLoseBattery, _LoseBattery);
 
     }
 
@@ -66,5 +71,10 @@ public class EyesOfRa : MonoBehaviour
     {
         _ZoneAnimator.SetBool("Opened", false);
         _BackgroundPanel.color = new Color(0.15f, 0.15f, 0.15f, (147.0f / 255.0f));
+    }
+    public void LoseBattery(object value)
+    {
+        float batteryLost = (float)value;   
+        _CurrentBatteryValue -= batteryLost;
     }
 }

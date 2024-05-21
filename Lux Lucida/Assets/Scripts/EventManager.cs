@@ -19,6 +19,7 @@ public class EventManager : MonoBehaviour
         ePickupKey = 7,
         eUseKey = 8,
         eDoesPlayerHaveKey = 9,
+        eLoseBattery = 10,
         //////////////
         eMAX
     }
