@@ -13,6 +13,7 @@ public class TutorialController : MonoBehaviour
         Lever = 3,
         LevelProgress = 4,
         PlayerSprint = 5,
+        Key,
 
     }
     private TutorialStep _TutorialStep = TutorialStep.PlayerMove;
@@ -20,7 +21,7 @@ public class TutorialController : MonoBehaviour
     private GameController _GameController;
 
     [SerializeField]
-    private TutorialZone _ZoneEyesOfRa, _ZonePlayerJump, _ZoneLever, _ZonePlayerSprint;
+    private TutorialZone _ZoneEyesOfRa, _ZonePlayerJump, _ZoneLever, _ZonePlayerSprint, _ZoneKey, _ZoneDoor;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +57,9 @@ public class TutorialController : MonoBehaviour
                 break;
             case TutorialStep.Lever:
                 LeverUpdate();
+                break;
+            case TutorialStep.Key:
+                KeyUpdate();
                 break;
         }
     }
@@ -122,7 +126,7 @@ public class TutorialController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 EventManager.TriggerEvent(EventManager.PossibleEvent.eCloseDialogue, null);
-                _TutorialStep = TutorialStep.EyesOfRa;
+                _TutorialStep = TutorialStep.Key;
             }
         }
     }
@@ -147,4 +151,19 @@ public class TutorialController : MonoBehaviour
 
     }
 
+    private void KeyUpdate()
+    {
+        if (_ZoneKey.PlayerWasInZone)
+        {
+            if (_ZoneKey.PlayerJustEnteredZone)
+            {
+                EventManager.TriggerEvent(EventManager.PossibleEvent.eStartDialogue, "Keys can be collected by walking on them.\n A key can open any door. All doors need a key to be opened");
+            }
+            if (_ZoneDoor.PlayerJustEnteredZone)
+            {
+                EventManager.TriggerEvent(EventManager.PossibleEvent.eCloseDialogue, null);
+                _TutorialStep = TutorialStep.EyesOfRa;
+            }
+        }
+    }
 }
