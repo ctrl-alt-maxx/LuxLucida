@@ -13,7 +13,8 @@ public class TutorialController : MonoBehaviour
         Lever = 3,
         LevelProgress = 4,
         PlayerSprint = 5,
-        Key,
+        Key = 6,
+        Ennemies = 7,
 
     }
     private TutorialStep _TutorialStep = TutorialStep.PlayerMove;
@@ -21,7 +22,7 @@ public class TutorialController : MonoBehaviour
     private GameController _GameController;
 
     [SerializeField]
-    private TutorialZone _ZoneEyesOfRa, _ZonePlayerJump, _ZoneLever, _ZonePlayerSprint, _ZoneKey, _ZoneDoor;
+    private TutorialZone _ZoneEyesOfRa, _ZonePlayerJump, _ZoneLever, _ZonePlayerSprint, _ZoneKey, _ZoneDoor, _ZoneEnnemies;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +61,9 @@ public class TutorialController : MonoBehaviour
                 break;
             case TutorialStep.Key:
                 KeyUpdate();
+                break;
+            case TutorialStep.Ennemies:
+                EnnemiesUpdate();
                 break;
         }
     }
@@ -108,7 +112,7 @@ public class TutorialController : MonoBehaviour
     {   
         if (_GameController.PercentProgress > 25)
         {
-            string dialogueText = "To complete the level you need to light up 100% of the ground and objects that are darkened in the level.\n The bar in the top will help you keep track how much more there is to do in the level. \n\n But be carefull! Your powers are limited\n In the bottom right of the screen you can see how much energy you have left in your eyes.\n\nHold [ R ] to restart level.";
+            string dialogueText = "To complete a level you need to light up 100% of the ground and objects that are darkened in the level.\n The bar in the top will help you keep track how much more there is to do in the level. \n\n But be carefull! Your powers are limited\n In the bottom right of the screen you can see how much energy you have left in your eyes.\n\nHold [ R ] to restart level.";
             _TutorialStep = TutorialStep.LevelProgress;
             EventManager.TriggerEvent(EventManager.PossibleEvent.eStartDialogue, dialogueText);
 
@@ -143,7 +147,7 @@ public class TutorialController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 EventManager.TriggerEvent(EventManager.PossibleEvent.eCloseDialogue, null);
-                _TutorialStep = TutorialStep.LevelProgress;
+                _TutorialStep = TutorialStep.Ennemies;
             }
 
         }
@@ -164,6 +168,23 @@ public class TutorialController : MonoBehaviour
                 EventManager.TriggerEvent(EventManager.PossibleEvent.eCloseDialogue, null);
                 _TutorialStep = TutorialStep.EyesOfRa;
             }
+        }
+    }
+    private void EnnemiesUpdate()
+    {
+        if (_ZoneEnnemies.PlayerWasInZone)
+        {
+            if (_ZoneEnnemies.PlayerJustEnteredZone)
+            {
+                string dialogueText = "Slimes and bats are present everywhere on the globe.\n They try to keep the world dark by darkening every object they come in contact with.\n Jumping on their heads is the only way to kill them\n Be carefull of the slimes! If they touch you, they will drain your light energy. Press [ C ] to close this dialogue.";
+                EventManager.TriggerEvent(EventManager.PossibleEvent.eStartDialogue, dialogueText);
+            }
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                EventManager.TriggerEvent(EventManager.PossibleEvent.eCloseDialogue, null);
+                _TutorialStep = TutorialStep.LevelProgress;
+            }
+
         }
     }
 }
