@@ -80,7 +80,7 @@ public class TutorialController : MonoBehaviour
             {
                 EventManager.TriggerEvent(EventManager.PossibleEvent.eStartDialogue, "Hold the [ LEFTSHIFT ] key to run.");
             }
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
                 EventManager.TriggerEvent(EventManager.PossibleEvent.eCloseDialogue, null);
                 _TutorialStep = TutorialStep.PlayerJump;
