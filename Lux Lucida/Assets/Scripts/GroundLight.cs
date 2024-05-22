@@ -43,6 +43,7 @@ public class GroundLight : MonoBehaviour
     private void OnCollisionStay(Collision collision)
     {
         if (LayerMask.LayerToName(collision.gameObject.layer)  == "LightActivator" && !IsLit) {
+            Debug.Log("this is lit af");
             LightUp();
             _ObjectScript.lightOpen();
         }
