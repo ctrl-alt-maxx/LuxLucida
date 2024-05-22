@@ -4719,7 +4719,7 @@ Transform:
   m_Children:
   - {fileID: 5255009768721645724}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &5951249801896847499
 CircleCollider2D:
@@ -4831,7 +4831,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4874126678125670354, guid: db73ecbebd801bd4282e244e488def8a, type: 3}
+  - {fileID: -710910164944623929, guid: 13c9b35bc80362b4f966b1102b10bde8, type: 3}
   - {fileID: 2100000, guid: f8defa343e39b2545bf3101b50eefa17, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
