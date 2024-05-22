@@ -46,7 +46,7 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                _Images[i].color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+                _Images[i].color = new Color(0.5f,0.5f,0.5f, 1.0f);
             }
         }
         if(Input.mouseScrollDelta.y < -0.001)
@@ -54,16 +54,16 @@ public class Inventory : MonoBehaviour
             if (_SelectedInventorySpace < _NInventorySpace - 1) {
                 _SelectedInventorySpace++;
                 ShowInventory();
-
+                EventManager.TriggerEvent(EventManager.PossibleEvent.eChangeInventorySpot, _SelectedInventorySpace);    
             }
             
         }
         else if (Input.mouseScrollDelta.y > 0.001)
         {
-            if (_SelectedInventorySpace > 0)
-            {
+            if (_SelectedInventorySpace > 0) {
                 _SelectedInventorySpace--;
                 ShowInventory();
+                EventManager.TriggerEvent(EventManager.PossibleEvent.eChangeInventorySpot, _SelectedInventorySpace);
             }
             
         }

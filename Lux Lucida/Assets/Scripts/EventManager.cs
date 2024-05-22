@@ -20,6 +20,8 @@ public class EventManager : MonoBehaviour
         eUseKey = 8,
         eDoesPlayerHaveKey = 9,
         eLoseBattery = 10,
+        eChangeInventorySpot = 11,
+        eUpdateRocketMeter = 12,
         //////////////
         eMAX
     }
