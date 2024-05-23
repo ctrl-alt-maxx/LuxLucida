@@ -22,6 +22,7 @@ public class EventManager : MonoBehaviour
         eLoseBattery = 10,
         eChangeInventorySpot = 11,
         eUpdateRocketMeter = 12,
+        eGrenadeUsed = 13,
         //////////////
         eMAX
     }

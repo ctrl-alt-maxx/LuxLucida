@@ -9,7 +9,9 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     [SerializeField]
-    private List<Image> _Images;
+    private GameState _GameState;
+    [SerializeField]
+    private List<Image> _Images, _Icons;
     [SerializeField]
     private TMP_Text _KeyAmountText;
     private Animator _Animator;
@@ -30,8 +32,19 @@ public class Inventory : MonoBehaviour
         
         EventManager.StartListening(EventManager.PossibleEvent.ePickupKey, _PickupKey);
         EventManager.StartListening(EventManager.PossibleEvent.eUseKey, _UseKey);
-        _Animator =GetComponent<Animator>();
-
+        _Animator = GetComponent<Animator>();
+        if (_GameState.CurrentLevel < 2)
+        {
+            _Icons[0].gameObject.SetActive(false);
+        }
+        if (_GameState.CurrentLevel < 3)
+        {
+            _Icons[1].gameObject.SetActive(false);
+        }
+        if (_GameState.CurrentLevel < 4)
+        {
+            _Icons[2].gameObject.SetActive(false);
+        }
         UpdateKeyAmountText();
     }
 

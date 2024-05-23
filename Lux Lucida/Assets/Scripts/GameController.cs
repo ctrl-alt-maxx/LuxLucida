@@ -69,7 +69,7 @@ public class GameController : MonoBehaviour
 
         if (PercentProgress >= 100)
         {
-            _GameState.NextLevel++;
+            _GameState.CurrentLevel++;
             SceneManager.LoadScene("SelectScene");
         }
     }
