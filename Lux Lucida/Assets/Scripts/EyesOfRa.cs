@@ -41,7 +41,7 @@ public class EyesOfRa : MonoBehaviour
     void Update()
     {
         _BatterySlider.value = _CurrentBatteryValue;
-        _BatteryText.text = (Mathf.Round((_CurrentBatteryValue/ _MaxBatteryValue) *100)).ToString() +  "% battery";
+        _BatteryText.text = (Mathf.Round((_CurrentBatteryValue/ _MaxBatteryValue) *100)).ToString() +  "% Eye Power";
         if (_IsActive)
         {
             _CurrentBatteryValue -= Time.deltaTime;
