@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Lever : MonoBehaviour
 {
@@ -8,12 +9,16 @@ public class Lever : MonoBehaviour
     private int _LeverId;
     [SerializeField]
     private Animator _Animator;
+    [SerializeField]
+    private bool _IsImpulse = false;
     private bool _IsOn = false, _PlayerIsNear = false;
+
+    
     
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -26,13 +31,22 @@ public class Lever : MonoBehaviour
                 if (!_IsOn)
                 {
                     EventManager.TriggerEvent(EventManager.PossibleEvent.eOnLeverOn, _LeverId);
+                    
                 }
                 else
                 {
                     EventManager.TriggerEvent(EventManager.PossibleEvent.eOnLeverOff, _LeverId);
                 }
-                _IsOn = !_IsOn;
-                _Animator.SetBool("LeverOn", _IsOn);
+                if (_IsImpulse)
+                {
+                    _Animator.SetTrigger("LeverTrigger");
+                }
+                else
+                {
+                    _IsOn = !_IsOn;
+                    _Animator.SetBool("LeverOn", _IsOn);
+                }
+                
             }
         }
         
