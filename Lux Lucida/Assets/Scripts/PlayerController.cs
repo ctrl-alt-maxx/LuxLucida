@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     private float controleX;
     private float controleY;
-    private bool _IsGrounded, _IsRunning = false;
+    private bool _IsGrounded, _IsRunning, _IsFalling = false;
     [SerializeField]
     private GameState _GameState;
     [SerializeField]
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
         if(_GameState.CurrentLevel < 2)
         {
             _CanFireGrenades = false;
-        }
+        } 
         if(_GameState.CurrentLevel < 3)
         {
 
@@ -78,6 +78,15 @@ public class PlayerController : MonoBehaviour
         float Vitesse = direction.magnitude;
 
         _AnimatorPlayer.SetFloat("Vitesse", Vitesse);
+        _AnimatorPlayer.SetFloat("Height", _Rigidbody.velocity.y);
+
+        _AnimatorPlayer.SetBool("Running", _IsRunning);
+
+        if (_IsGrounded && _IsFalling)
+        {
+            _AnimatorPlayer.SetTrigger("Landed");
+            _IsFalling = false;
+        }
 
 
         switch (_InventorySpot)
@@ -159,11 +168,21 @@ public class PlayerController : MonoBehaviour
 
         if (_IsGrounded && Input.GetKey("space") && canJump)
         {
+            if (!_IsFalling)
+            {
+                _AnimatorPlayer.SetTrigger("Jump");
+                _IsFalling = true;
+            }
+       
+            
             bool isRocketLaunch = _InventorySpot == InventorySpot.rocketLaunch && _CanRocketLauch;
             float force = isRocketLaunch ? jumpForce * _MultiplierRocketLaunch : jumpForce;
+            
             _Rigidbody.AddForce(new Vector2(0, force), ForceMode2D.Impulse);
             _IsGrounded = false;
             _RocketLaunchCooldownTime = 0.0f;
+
+            
         }
         
         
@@ -174,9 +193,16 @@ public class PlayerController : MonoBehaviour
         {
             EventManager.TriggerEvent(EventManager.PossibleEvent.eRestartLevel, null);
         }
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Head"))
+        {
+            _Rigidbody.AddForce(transform.up * jumpForce, ForceMode2D.Impulse); 
+            _AnimatorPlayer.SetTrigger("Flip");
+        }
     }
     private void CheckIfGrounded()
     {
+
+
         int layerMask = LayerMask.GetMask(new[] { "Ground" });
         Vector2 pointDebutRay = new Vector2(transform.position.x, _Collider.bounds.min.y);
         RaycastHit2D hit = Physics2D.Raycast(pointDebutRay , Vector2.down, _DistanceRayCast, layerMask);
@@ -202,4 +228,6 @@ public class PlayerController : MonoBehaviour
             EventManager.TriggerEvent(EventManager.PossibleEvent.eUpdateRocketMeter, 100.0f);
         }
     }
+
+
 }
