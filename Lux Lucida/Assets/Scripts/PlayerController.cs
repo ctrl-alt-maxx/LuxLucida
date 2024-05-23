@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject _ExemplaireGrenade;
     [SerializeField]
-    private GameObject _Hand;
+    private GameObject _Hand, _LeftBoot, _RightBoot;
     [SerializeField]
     private float _GliderGraviyScale;
     private InventorySpot _InventorySpot = 0;
@@ -51,7 +51,11 @@ public class PlayerController : MonoBehaviour
         if(_GameState.CurrentLevel < 2)
         {
             _CanFireGrenades = false;
-        } 
+        }
+        else
+        {
+            EnterGrenade();
+        }
         if(_GameState.CurrentLevel < 3)
         {
 
@@ -115,6 +119,11 @@ public class PlayerController : MonoBehaviour
             _Hand.SetActive(true);
         }
         
+    }
+    private void EnterRocketLaunch()
+    {
+        _LeftBoot.SetActive(true);
+        _RightBoot.SetActive(true);
     }
     private void EnterGlider()
     {
@@ -247,6 +256,9 @@ public class PlayerController : MonoBehaviour
             case InventorySpot.glider:
                 EnterGlider();
                 break;
+            case InventorySpot.rocketLaunch:
+                EnterRocketLaunch();
+                break;  
         }
         if(_InventorySpot != InventorySpot.grenade)
         {
@@ -255,6 +267,8 @@ public class PlayerController : MonoBehaviour
         if (_InventorySpot != InventorySpot.rocketLaunch)
         {
             EventManager.TriggerEvent(EventManager.PossibleEvent.eUpdateRocketMeter, 100.0f);
+            _LeftBoot.SetActive(false);
+            _RightBoot.SetActive(false);
         }
         if(_InventorySpot != InventorySpot.glider)
         {

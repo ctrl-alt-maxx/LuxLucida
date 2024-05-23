@@ -25,6 +25,8 @@ public class EventManager : MonoBehaviour
         eOnValveActivation = 14,
         eChromasTouch = 15,
         ePickupFirefly = 16,
+        eEyeOfRaActivation = 17,
+        eEyeOfRaDeactivation = 18,
         //////////////
         eMAX
     }

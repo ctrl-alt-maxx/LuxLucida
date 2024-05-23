@@ -79,12 +79,14 @@ public class EyesOfRa : MonoBehaviour
     {
         _ZoneAnimator.SetBool("Opened", true);
         _BackgroundPanel.color = new Color(1, 1, 1, (147.0f / 255.0f));
+        EventManager.TriggerEvent(EventManager.PossibleEvent.eEyeOfRaActivation, null);
 
     }
     public void TurnOff()
     {
         _ZoneAnimator.SetBool("Opened", false);
         _BackgroundPanel.color = new Color(0.15f, 0.15f, 0.15f, (147.0f / 255.0f));
+        EventManager.TriggerEvent(EventManager.PossibleEvent.eEyeOfRaDeactivation, null);
     }
     public void LoseBattery(object value)
     {
