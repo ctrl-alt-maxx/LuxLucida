@@ -21,8 +21,8 @@ public class EyesOfRa : MonoBehaviour
     private TMP_Text _BatteryText;
     private Animator _ZoneAnimator;
     private Image _BackgroundPanel;
-    private bool _IsActive=false;
-    private UnityAction<object> _LoseBattery;
+    private bool _IsActive=false, _ChromasTouchActivated = false;
+    private UnityAction<object> _LoseBattery, _ChromasTouchActivation;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +34,8 @@ public class EyesOfRa : MonoBehaviour
 
         _LoseBattery = LoseBattery;
         EventManager.StartListening(EventManager.PossibleEvent.eLoseBattery, _LoseBattery);
+        _ChromasTouchActivation = ChromasTouchActivation;
+        EventManager.StartListening(EventManager.PossibleEvent.eChromasTouch, _ChromasTouchActivation);
 
     }
 
@@ -41,10 +43,20 @@ public class EyesOfRa : MonoBehaviour
     void Update()
     {
         _BatterySlider.value = _CurrentBatteryValue;
-        _BatteryText.text = (Mathf.Round((_CurrentBatteryValue/ _MaxBatteryValue) *100)).ToString() +  "% Eye Power";
+        if(!_ChromasTouchActivated)
+        {
+            _BatteryText.text = (Mathf.Round((_CurrentBatteryValue / _MaxBatteryValue) * 100)).ToString() + "% Eye Power";
+        }
+        else
+        {
+            _BatteryText.text = "Chroma's touch";
+        }
         if (_IsActive)
         {
-            _CurrentBatteryValue -= Time.deltaTime;
+            if(!_ChromasTouchActivated)
+            {
+                _CurrentBatteryValue -= Time.deltaTime;
+            }
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -74,7 +86,15 @@ public class EyesOfRa : MonoBehaviour
     }
     public void LoseBattery(object value)
     {
-        float batteryLost = (float)value;   
-        _CurrentBatteryValue -= batteryLost;
+        if (!_ChromasTouchActivated)
+        {
+            float batteryLost = (float)value;
+            _CurrentBatteryValue -= batteryLost;
+        }
+    }
+    private void ChromasTouchActivation(object _)
+    {
+        _ChromasTouchActivated = true;
+        _CurrentBatteryValue = _MaxBatteryValue;
     }
 }
