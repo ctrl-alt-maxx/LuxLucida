@@ -988,31 +988,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &483392904 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a7f12dffb11c4dc41a08b90375eeb709, type: 3}
-  m_PrefabInstance: {fileID: 1887210300}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &483392905 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a7f12dffb11c4dc41a08b90375eeb709, type: 3}
   m_PrefabInstance: {fileID: 1887210300}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &483392906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 483392904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95169242bba21fa48a4b34d549864f81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  positionAdjuster: {x: 0, y: -0.88, z: 0}
-  _AdjustRotation: 1
 --- !u!1 &501010652
 GameObject:
   m_ObjectHideFlags: 0
@@ -3829,10 +3809,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a7f12dffb11c4dc41a08b90375eeb709, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 483392906}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7f12dffb11c4dc41a08b90375eeb709, type: 3}
 --- !u!224 &1993376848 stripped
 RectTransform:
