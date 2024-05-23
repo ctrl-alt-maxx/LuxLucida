@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
-using static Unity.VisualScripting.FlowStateWidget;
 
 public class EventManagerLevelSelect : MonoBehaviour
 {

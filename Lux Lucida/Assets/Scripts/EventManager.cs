@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
-using static Unity.VisualScripting.FlowStateWidget;
 
 public class EventManager : MonoBehaviour
 {
@@ -20,6 +19,9 @@ public class EventManager : MonoBehaviour
         eUseKey = 8,
         eDoesPlayerHaveKey = 9,
         eLoseBattery = 10,
+        eChangeInventorySpot = 11,
+        eUpdateRocketMeter = 12,
+        eGrenadeUsed = 13,
         //////////////
         eMAX
     }

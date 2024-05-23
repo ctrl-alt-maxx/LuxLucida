@@ -35,7 +35,7 @@ public class levelController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LastUnlockedLevel = _GameState.NextLevel;
+        LastUnlockedLevel = _GameState.CurrentLevel;
         _PlayerTransform.position = _GameState.PlayerPosition;
         levels.AddLast(new Level(1, "La valée sombre", "Ici ce débute votre quête pour illuminé le globe."));
         levels.AddLast(new Level(2, "Plaine crépuscule", "Je vois la lumiere au bout du tunnel"));
@@ -46,7 +46,10 @@ public class levelController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            BackToMenu();
+        }
     }
 
     public void ShowHUD()
@@ -75,4 +78,9 @@ public class levelController : MonoBehaviour
         _GameState.PlayerPosition = _PlayerTransform.position;
     }
 
+
+    private void BackToMenu()
+    {
+        SceneManager.LoadScene("MenuScene");
+    }
 }

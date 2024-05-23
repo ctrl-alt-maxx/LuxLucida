@@ -1,8 +1,16 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
 public class PlayerController : MonoBehaviour
 {
+    private enum InventorySpot
+    {
+        grenade = 0,
+        rocketLaunch =1,
+        glider = 2
+    }
     [SerializeField]
     private Animator _AnimatorPlayer;
     private Rigidbody2D _Rigidbody;
@@ -11,18 +19,43 @@ public class PlayerController : MonoBehaviour
     private float controleX;
     private float controleY;
     private bool _IsGrounded, _IsRunning = false;
-
+    [SerializeField]
+    private GameState _GameState;
     [SerializeField]
     private float _DistanceRayCast = 0.5f;
     [SerializeField]
     private float walkingSpeed = 5, runningSpeed = 7;
     [SerializeField]
-    private float jumpForce = 5;
+    private float jumpForce = 5, _MultiplierRocketLaunch = 1.5f;
+    [SerializeField]
+    private float _GrenadeLaunchForce = 5.0f;
+    [SerializeField]
+    private GameObject _ExemplaireGrenade;
+    [SerializeField]
+    private GameObject _Hand;
+    private InventorySpot _InventorySpot = 0;
+    private UnityAction<object> _ChangeInventorySpot;
+    private float _RocketLaunchCooldownLength = 2.0f, _RocketLaunchCooldownTime;
+    private bool _CanFireGrenades = true, _CanRocketLauch = true;
+    private int _GrenadeCount = 3;
     // Start is called before the first frame update
     void Start()
     {
+        _ChangeInventorySpot = ChangeInventorySpot;
+        EventManager.StartListening(EventManager.PossibleEvent.eChangeInventorySpot, _ChangeInventorySpot);
         _Collider = GetComponent<CapsuleCollider2D>();
         _Rigidbody = GetComponent<Rigidbody2D>();
+        if(_GameState.CurrentLevel < 2)
+        {
+            _CanFireGrenades = false;
+        }
+        if(_GameState.CurrentLevel < 3)
+        {
+
+            _CanRocketLauch = false;
+            Debug.Log(_CanRocketLauch);
+        }
+        _RocketLaunchCooldownTime = _RocketLaunchCooldownLength;
     }
 
     // Update is called once per frame
@@ -45,7 +78,69 @@ public class PlayerController : MonoBehaviour
         float Vitesse = direction.magnitude;
 
         _AnimatorPlayer.SetFloat("Vitesse", Vitesse);
+
+
+        switch (_InventorySpot)
+        {
+            case InventorySpot.grenade:
+                UpdateGrenade();
+                break;
+            case InventorySpot.rocketLaunch:
+                UpdateRocketLaunch();
+                break;
+            case InventorySpot.glider:
+                UpdateGlider();
+                break;
+        }
     }
+    private void EnterGrenade()
+    {
+        if(_CanFireGrenades) {
+            _Hand.SetActive(true);
+        }
+        
+    }
+    private void UpdateGrenade()
+    {
+        if (_CanFireGrenades)
+        {
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = transform.position.z - Camera.main.transform.position.z; ;
+            Vector2 direction = (Camera.main.ScreenToWorldPoint(mousePos) - _Hand.transform.position);
+            direction.Normalize();
+            
+            if (Input.GetMouseButtonDown(0))
+            {
+                GameObject grenade = Instantiate(_ExemplaireGrenade, _Hand.transform.position, Quaternion.identity);
+                grenade.GetComponent<Rigidbody2D>().AddForce(direction * _GrenadeLaunchForce, ForceMode2D.Impulse);
+                _GrenadeCount--;
+                EventManager.TriggerEvent(EventManager.PossibleEvent.eGrenadeUsed, null);
+                if(_GrenadeCount == 0)
+                {
+                    _CanFireGrenades = false;
+                }
+            }
+        }
+       
+        
+
+    }
+    private void UpdateRocketLaunch()
+    {
+        if (_CanRocketLauch)
+        {
+            if (_IsGrounded)
+            {
+                _RocketLaunchCooldownTime += Time.deltaTime;
+            }
+            EventManager.TriggerEvent(EventManager.PossibleEvent.eUpdateRocketMeter, (_RocketLaunchCooldownTime / _RocketLaunchCooldownLength) * 100);
+        }
+    }
+    private void UpdateGlider()
+    {
+
+    }
+
 
     private void FixedUpdate()
     {
@@ -54,11 +149,21 @@ public class PlayerController : MonoBehaviour
 
        
         CheckIfGrounded();
-        
-        if (_IsGrounded && Input.GetKey("space"))
+
+        bool canJump = true;
+
+        if(_InventorySpot == InventorySpot.rocketLaunch)
         {
-            _Rigidbody.AddForce(new Vector2(0, jumpForce));
+            canJump = (_RocketLaunchCooldownTime > _RocketLaunchCooldownLength);
+        }
+
+        if (_IsGrounded && Input.GetKey("space") && canJump)
+        {
+            bool isRocketLaunch = _InventorySpot == InventorySpot.rocketLaunch && _CanRocketLauch;
+            float force = isRocketLaunch ? jumpForce * _MultiplierRocketLaunch : jumpForce;
+            _Rigidbody.AddForce(new Vector2(0, force), ForceMode2D.Impulse);
             _IsGrounded = false;
+            _RocketLaunchCooldownTime = 0.0f;
         }
         
         
@@ -79,5 +184,22 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(pointDebutRay, Vector2.down * _DistanceRayCast, _IsGrounded ? Color.green : Color.red);
     }
 
-
+    private void ChangeInventorySpot(object spot)
+    {
+        _InventorySpot = (InventorySpot)spot;
+        switch (_InventorySpot)
+        {
+            case InventorySpot.grenade:
+                EnterGrenade();
+                break;
+        }
+        if(_InventorySpot != InventorySpot.grenade)
+        {
+            _Hand.SetActive(false);
+        }
+        if (_InventorySpot != InventorySpot.rocketLaunch)
+        {
+            EventManager.TriggerEvent(EventManager.PossibleEvent.eUpdateRocketMeter, 100.0f);
+        }
+    }
 }

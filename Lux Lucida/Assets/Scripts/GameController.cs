@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.GlobalIllumination;
@@ -69,7 +68,8 @@ public class GameController : MonoBehaviour
 
         if (PercentProgress >= 100)
         {
-            _GameState.NextLevel++;
+            _GameState.CurrentLevel++;
+            _GameState.Save();
             SceneManager.LoadScene("SelectScene");
         }
     }

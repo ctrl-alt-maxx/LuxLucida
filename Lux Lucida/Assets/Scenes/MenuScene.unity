@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0024008406, g: 0.0023750206, b: 0.002339241, a: 1}
+  m_IndirectSpecularColor: {r: 0.0024008795, g: 0.00237505, b: 0.002339264, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2682,6 +2682,7 @@ MonoBehaviour:
   _MainCanvas: {fileID: 406998524}
   _AvatarCanvas: {fileID: 188444783}
   _OptionsCanvas: {fileID: 1711744089}
+  _GameState: {fileID: 11400000, guid: 390a3e7c4e50b964f8a21fa84734f142, type: 2}
 --- !u!114 &1381011758
 MonoBehaviour:
   m_ObjectHideFlags: 0
