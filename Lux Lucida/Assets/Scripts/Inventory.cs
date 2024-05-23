@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private TMP_Text _KeyAmountText;
     private Animator _Animator;
-    private int  _NInventorySpace = 3;
+    private int  _NInventorySpace = 4;
     public int _SelectedInventorySpace = 0;
     private float _LastActivityTime;
     [SerializeField]
