@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,30 +14,24 @@ public class MenuController : MonoBehaviour
     private Canvas _MainCanvas, _AvatarCanvas, _OptionsCanvas;
     [SerializeField]
     private GameState _GameState;
-    [SerializeField]
-    private int _level;
 
     private void Start()
     {
 
         //Load Game Progress
 
-        if (!(PlayerPrefs.HasKey("CurrentLevel"))){
-            PlayerPrefs.SetInt("CurrentLevel", 1);
-            _level = PlayerPrefs.GetInt("CurrentLevel");
-        }
-        else
-        {
-            _level = PlayerPrefs.GetInt("CurrentLevel");
-        }
+        _GameState.Load();
+        
         PlayerPrefs.Save();
 
 
         _OptionsCanvas.enabled = false;
         _AvatarCanvas.enabled = false;
     }
+   
     public void Quit()
     {
+        _GameState.Save();
         Application.Quit();
         Debug.Log("Application.Quit()");
     }

@@ -46,7 +46,10 @@ public class levelController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            BackToMenu();
+        }
     }
 
     public void ShowHUD()
@@ -75,4 +78,9 @@ public class levelController : MonoBehaviour
         _GameState.PlayerPosition = _PlayerTransform.position;
     }
 
+
+    private void BackToMenu()
+    {
+        SceneManager.LoadScene("MenuScene");
+    }
 }
