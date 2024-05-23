@@ -37,8 +37,8 @@ public class levelController : MonoBehaviour
     {
         LastUnlockedLevel = _GameState.CurrentLevel;
         _PlayerTransform.position = _GameState.PlayerPosition;
-        levels.AddLast(new Level(1, "La valée sombre", "Ici ce débute votre quête pour illuminé le globe."));
-        levels.AddLast(new Level(2, "Plaine crépuscule", "Je vois la lumiere au bout du tunnel"));
+        levels.AddLast(new Level(1, "A dark new world", "Here is where you start your journey to light up our world"));
+        levels.AddLast(new Level(2, "The plains of dawn", "I see the light at the end of the tunnel"));
         HideHUD();
         DontDestroyOnLoad(gameObject);
     }
