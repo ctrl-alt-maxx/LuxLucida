@@ -10,9 +10,27 @@ public class MenuController : MonoBehaviour
     private Animator _GlobeAnimator;
     [SerializeField]
     private Canvas _MainCanvas, _AvatarCanvas, _OptionsCanvas;
+    [SerializeField]
+    private GameState _GameState;
+    [SerializeField]
+    private int _level;
 
     private void Start()
     {
+
+        //Load Game Progress
+
+        if (!(PlayerPrefs.HasKey("CurrentLevel"))){
+            PlayerPrefs.SetInt("CurrentLevel", 1);
+            _level = PlayerPrefs.GetInt("CurrentLevel");
+        }
+        else
+        {
+            _level = PlayerPrefs.GetInt("CurrentLevel");
+        }
+        PlayerPrefs.Save();
+
+
         _OptionsCanvas.enabled = false;
         _AvatarCanvas.enabled = false;
     }
