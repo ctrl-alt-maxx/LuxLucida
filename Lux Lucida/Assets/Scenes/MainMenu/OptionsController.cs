@@ -39,4 +39,6 @@ public class OptionsController : MonoBehaviour
         string modeText = _IsFullscreen ? "Fullscreen" : "Windowed";
         _TextFullscreen.SetText("Fullscreen mode : "  + modeText);  
     }
+
+    
 }

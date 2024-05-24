@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+[RequireComponent(typeof(AudioSource))]
 public class MenuController : MonoBehaviour
 {
 
@@ -14,16 +15,22 @@ public class MenuController : MonoBehaviour
     private Canvas _MainCanvas, _AvatarCanvas, _OptionsCanvas;
     [SerializeField]
     private GameState _GameState;
+    [SerializeField]
+    private Slider _MusicSlider;
+    private AudioSource _AudioSource;
 
     private void Start()
     {
-
+        _AudioSource = gameObject.GetComponent<AudioSource>();
+        _MusicSlider.value = _GameState.MusicLevel;
+        StartCoroutine(PlayMusic());
         //Load Game Progress
-
+        
+        
         _GameState.Load();
         
         PlayerPrefs.Save();
-
+        
 
         _OptionsCanvas.enabled = false;
         _AvatarCanvas.enabled = false;
@@ -59,5 +66,27 @@ public class MenuController : MonoBehaviour
         _MainCanvas.enabled = true;
         _OptionsCanvas.enabled = false;
         _AvatarCanvas.enabled = false;
+    }
+    private IEnumerator PlayMusic()
+    {
+        _AudioSource.Play();
+        _AudioSource.volume = _GameState.MusicLevel;
+        
+        yield return null;
+    }
+
+    public void OnMusicValueChange()
+    {
+        _GameState.MusicLevel = _MusicSlider.value;
+        _AudioSource.volume = _GameState.MusicLevel;
+    }
+    public void ResetPlayerData()
+    {
+        PlayerPrefs.DeleteAll();
+        _GameState.CurrentLevel = 1;
+        _GameState.MusicLevel = 1;
+        _GameState.ColorIndex = 0;
+        _GameState.Load();
+        SceneManager.LoadScene("MenuScene");
     }
 }
