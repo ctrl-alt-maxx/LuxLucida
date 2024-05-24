@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 [RequireComponent(typeof(AudioSource))]
 public class MenuController : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class MenuController : MonoBehaviour
     [SerializeField]
     private Slider _MusicSlider;
     private AudioSource _AudioSource;
+
+    [SerializeField]
+    private TMP_Text _ModText;
 
     private void Start()
     {
@@ -35,7 +39,54 @@ public class MenuController : MonoBehaviour
         _OptionsCanvas.enabled = false;
         _AvatarCanvas.enabled = false;
     }
-   
+
+
+    void OnGUI()
+    {
+       
+        if (Event.current.Equals(Event.KeyboardEvent(KeyCode.Alpha1.ToString())))
+        {
+            _ModText.text = "MOD: 1";
+            _GameState.CurrentLevel = 1;
+        }
+        if (Event.current.Equals(Event.KeyboardEvent(KeyCode.Alpha2.ToString())))
+        {
+            _ModText.text = "MOD: 2";
+            _GameState.CurrentLevel = 2;
+            
+        }
+        if (Event.current.Equals(Event.KeyboardEvent(KeyCode.Alpha3.ToString())))
+        {
+            _ModText.text = "MOD: 3";
+            _GameState.CurrentLevel = 3;
+        }
+        if (Event.current.Equals(Event.KeyboardEvent(KeyCode.Alpha4.ToString())))
+        {
+            _ModText.text = "MOD: 4";
+            _GameState.CurrentLevel = 4;
+        }
+        if (Event.current.Equals(Event.KeyboardEvent(KeyCode.Alpha5.ToString())))
+        {
+            _ModText.text = "MOD: 5";
+            _GameState.CurrentLevel = 5;
+        }
+        if (Event.current.Equals(Event.KeyboardEvent(KeyCode.Alpha6.ToString())))
+        {
+            _ModText.text = "MOD: Final";
+            _GameState.CurrentLevel = 6;
+        }
+       
+
+        
+    }
+
+    private void Update()
+    {
+        
+       
+        
+    }
+
     public void Quit()
     {
         _GameState.Save();
@@ -45,6 +96,8 @@ public class MenuController : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene("SelectScene");
+        _AudioSource.Play();
+
     }
     public void Options()
     {   

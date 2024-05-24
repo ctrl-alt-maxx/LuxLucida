@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour
             canJump = (_RocketLaunchCooldownTime > _RocketLaunchCooldownLength);
         }
 
-        if (_IsGrounded && Input.GetKey("space") && canJump)
+        if (_IsGrounded && (Input.GetKey("space") || Input.GetKey("w") && canJump))
         {
             if (!_IsFalling)
             {

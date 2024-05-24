@@ -118,5 +118,6 @@ public class levelController : MonoBehaviour
     private void BackToMenu()
     {
         SceneManager.LoadScene("MenuScene");
+        _AudioSource.Stop();
     }
 }
