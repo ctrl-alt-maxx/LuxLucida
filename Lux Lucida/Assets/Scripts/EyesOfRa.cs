@@ -21,7 +21,7 @@ public class EyesOfRa : MonoBehaviour
     private TMP_Text _BatteryText;
     private Animator _ZoneAnimator;
     private Image _BackgroundPanel;
-    private bool _IsActive=false, _ChromasTouchActivated = false;
+    private bool _IsActive=false, _ChromasTouchActivated = false, _BatteryLeft = true;
     private UnityAction<object> _LoseBattery, _ChromasTouchActivation, _FireflyPickup;
     // Start is called before the first frame update
     void Start()
@@ -53,17 +53,23 @@ public class EyesOfRa : MonoBehaviour
         {
             _BatteryText.text = "Chroma's touch";
         }
-        if (_IsActive)
+        if (_IsActive && _BatteryLeft)
         {
             if(!_ChromasTouchActivated)
             {
                 _CurrentBatteryValue -= Time.deltaTime;
             }
+            if(_CurrentBatteryValue<0) { 
+                _CurrentBatteryValue = 0;
+                _BatteryLeft = false;
+                _IsActive = false;
+                TurnOff();
+            }
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
             _IsActive = !_IsActive;
-            if(_IsActive)
+            if(_IsActive && _BatteryLeft)
             {
                 TurnOn();
             }
@@ -104,5 +110,6 @@ public class EyesOfRa : MonoBehaviour
     private void FireflyPickup(object _)
     {
         _CurrentBatteryValue = _MaxBatteryValue;
+        _BatteryLeft = true;
     }
 }
