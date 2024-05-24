@@ -290,6 +290,11 @@
                 "type": "UnityEngine.ProBuilder.Stl.FileType, Unity.ProBuilder.Stl, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "export.stlExportFormat",
                 "value": "{\"m_Value\":0}"
+            },
+            {
+                "type": "UnityEditor.ProBuilder.Actions.MirrorObjects+MirrorSettings, Unity.ProBuilder.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "MirrorObjects.mirrorAxes",
+                "value": "{\"m_Value\":15}"
             }
         ]
     }
