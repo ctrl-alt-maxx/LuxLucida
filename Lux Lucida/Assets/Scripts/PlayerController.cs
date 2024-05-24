@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
     {
         grenade = 0,
         rocketLaunch =1,
-        glider = 2
+        glider = 2,
+        emptyHand = 3
     }
     [SerializeField]
     private Animator _AnimatorPlayer;
@@ -32,11 +33,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject _ExemplaireGrenade;
     [SerializeField]
-    private GameObject _Hand;
+    private GameObject _Hand, _LeftBoot, _RightBoot;
+    [SerializeField]
+    private float _GliderGraviyScale;
     private InventorySpot _InventorySpot = 0;
     private UnityAction<object> _ChangeInventorySpot;
-    private float _RocketLaunchCooldownLength = 2.0f, _RocketLaunchCooldownTime;
-    private bool _CanFireGrenades = true, _CanRocketLauch = true;
+    private float _RocketLaunchCooldownLength = 1.0f, _RocketLaunchCooldownTime;
+    private bool _CanFireGrenades = true, _CanRocketLauch = true, _CanGlide = true;
     private int _GrenadeCount = 3;
     // Start is called before the first frame update
     void Start()
@@ -48,12 +51,20 @@ public class PlayerController : MonoBehaviour
         if(_GameState.CurrentLevel < 2)
         {
             _CanFireGrenades = false;
-        } 
+        }
+        else
+        {
+            EnterGrenade();
+        }
         if(_GameState.CurrentLevel < 3)
         {
 
             _CanRocketLauch = false;
-            Debug.Log(_CanRocketLauch);
+        }
+        if (_GameState.CurrentLevel < 4)
+        {
+
+            _CanGlide = false;
         }
         _RocketLaunchCooldownTime = _RocketLaunchCooldownLength;
     }
@@ -109,6 +120,19 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+    private void EnterRocketLaunch()
+    {
+        _LeftBoot.SetActive(true);
+        _RightBoot.SetActive(true);
+    }
+    private void EnterGlider()
+    {
+        if (_CanGlide)
+        {
+            _AnimatorPlayer.SetBool("GliderEquiped", true);
+        }
+    }
+       
     private void UpdateGrenade()
     {
         if (_CanFireGrenades)
@@ -147,7 +171,18 @@ public class PlayerController : MonoBehaviour
     }
     private void UpdateGlider()
     {
-
+        if (_CanGlide)
+        {
+            if (!_IsGrounded && _Rigidbody.velocity.y < 0)
+            {
+                _Rigidbody.gravityScale = _GliderGraviyScale;
+            }
+            else
+            {
+                _Rigidbody.gravityScale = 2.0f;
+            }
+        }
+       
     }
 
 
@@ -161,7 +196,7 @@ public class PlayerController : MonoBehaviour
 
         bool canJump = true;
 
-        if(_InventorySpot == InventorySpot.rocketLaunch)
+        if(_InventorySpot == InventorySpot.rocketLaunch && _CanRocketLauch)
         {
             canJump = (_RocketLaunchCooldownTime > _RocketLaunchCooldownLength);
         }
@@ -218,6 +253,12 @@ public class PlayerController : MonoBehaviour
             case InventorySpot.grenade:
                 EnterGrenade();
                 break;
+            case InventorySpot.glider:
+                EnterGlider();
+                break;
+            case InventorySpot.rocketLaunch:
+                EnterRocketLaunch();
+                break;  
         }
         if(_InventorySpot != InventorySpot.grenade)
         {
@@ -226,6 +267,13 @@ public class PlayerController : MonoBehaviour
         if (_InventorySpot != InventorySpot.rocketLaunch)
         {
             EventManager.TriggerEvent(EventManager.PossibleEvent.eUpdateRocketMeter, 100.0f);
+            _LeftBoot.SetActive(false);
+            _RightBoot.SetActive(false);
+        }
+        if(_InventorySpot != InventorySpot.glider)
+        {
+            _Rigidbody.gravityScale = 2.0f;
+            _AnimatorPlayer.SetBool("GliderEquiped", false);
         }
     }
 

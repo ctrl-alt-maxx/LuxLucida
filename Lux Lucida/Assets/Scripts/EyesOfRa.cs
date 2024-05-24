@@ -22,7 +22,7 @@ public class EyesOfRa : MonoBehaviour
     private Animator _ZoneAnimator;
     private Image _BackgroundPanel;
     private bool _IsActive=false, _ChromasTouchActivated = false;
-    private UnityAction<object> _LoseBattery, _ChromasTouchActivation;
+    private UnityAction<object> _LoseBattery, _ChromasTouchActivation, _FireflyPickup;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +36,8 @@ public class EyesOfRa : MonoBehaviour
         EventManager.StartListening(EventManager.PossibleEvent.eLoseBattery, _LoseBattery);
         _ChromasTouchActivation = ChromasTouchActivation;
         EventManager.StartListening(EventManager.PossibleEvent.eChromasTouch, _ChromasTouchActivation);
+        _FireflyPickup = FireflyPickup;
+        EventManager.StartListening(EventManager.PossibleEvent.ePickupFirefly, _FireflyPickup);
 
     }
 
@@ -77,12 +79,14 @@ public class EyesOfRa : MonoBehaviour
     {
         _ZoneAnimator.SetBool("Opened", true);
         _BackgroundPanel.color = new Color(1, 1, 1, (147.0f / 255.0f));
+        EventManager.TriggerEvent(EventManager.PossibleEvent.eEyeOfRaActivation, null);
 
     }
     public void TurnOff()
     {
         _ZoneAnimator.SetBool("Opened", false);
         _BackgroundPanel.color = new Color(0.15f, 0.15f, 0.15f, (147.0f / 255.0f));
+        EventManager.TriggerEvent(EventManager.PossibleEvent.eEyeOfRaDeactivation, null);
     }
     public void LoseBattery(object value)
     {
@@ -95,6 +99,10 @@ public class EyesOfRa : MonoBehaviour
     private void ChromasTouchActivation(object _)
     {
         _ChromasTouchActivated = true;
+        _CurrentBatteryValue = _MaxBatteryValue;
+    }
+    private void FireflyPickup(object _)
+    {
         _CurrentBatteryValue = _MaxBatteryValue;
     }
 }

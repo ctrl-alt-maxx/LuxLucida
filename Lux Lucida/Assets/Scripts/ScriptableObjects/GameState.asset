@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f113911f62c15447b14a8b0436b02b3, type: 3}
   m_Name: GameState
   m_EditorClassIdentifier: 
-  CurrentLevel: 5
+  CurrentLevel: 3
   PlayerPosition: {x: -1.1547977, y: -2.4706259, z: 4.594521}
