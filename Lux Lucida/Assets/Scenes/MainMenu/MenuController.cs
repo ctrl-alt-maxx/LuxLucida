@@ -80,4 +80,13 @@ public class MenuController : MonoBehaviour
         _GameState.MusicLevel = _MusicSlider.value;
         _AudioSource.volume = _GameState.MusicLevel;
     }
+    public void ResetPlayerData()
+    {
+        PlayerPrefs.DeleteAll();
+        _GameState.CurrentLevel = 1;
+        _GameState.MusicLevel = 1;
+        _GameState.ColorIndex = 0;
+        _GameState.Load();
+        SceneManager.LoadScene("MenuScene");
+    }
 }

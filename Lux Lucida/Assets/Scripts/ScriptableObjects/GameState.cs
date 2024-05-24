@@ -17,7 +17,7 @@ public class GameState : ScriptableObject
         }
         if (!(PlayerPrefs.HasKey("ColorIndex")))
         {
-            PlayerPrefs.SetInt("ColorIndex", 1);
+            PlayerPrefs.SetInt("ColorIndex", 0);
         }
         if (!(PlayerPrefs.HasKey("MusicLevel")))
         {
