@@ -207,6 +207,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: -7321485264753333482, guid: a7f12dffb11c4dc41a08b90375eeb709, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 43b8f4cccb91fa040b0d33f9783b5316, type: 2}
+    - target: {fileID: -7321485264753333482, guid: a7f12dffb11c4dc41a08b90375eeb709, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: fc8a1738a3104644aa3638433d1c1ed6, type: 2}
     - target: {fileID: -5424213705957445524, guid: a7f12dffb11c4dc41a08b90375eeb709, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -355,7 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf25e8ad3762bd439d493bbd794e169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: 2
+  gravity: 8
 --- !u!95 &93842309 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 4430752043326821638, guid: d20aaf8b0c9d30040829ac60f14b09ab, type: 3}
@@ -1445,8 +1453,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: deff888a2eb8622438354e48323d6001, type: 2}
-  m_sharedMaterial: {fileID: 8719806372948507913, guid: deff888a2eb8622438354e48323d6001, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1585,8 +1593,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '[ Press E to start level ]'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: deff888a2eb8622438354e48323d6001, type: 2}
-  m_sharedMaterial: {fileID: 8719806372948507913, guid: deff888a2eb8622438354e48323d6001, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2011,6 +2019,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1890959055}
   - component: {fileID: 1890959054}
+  - component: {fileID: 1890959056}
   m_Layer: 0
   m_Name: LevelController
   m_TagString: Untagged
@@ -2035,6 +2044,11 @@ MonoBehaviour:
   _LevelInfoPanel: {fileID: 346459999}
   _GameState: {fileID: 11400000, guid: 390a3e7c4e50b964f8a21fa84734f142, type: 2}
   _PlayerTransform: {fileID: 1734494105}
+  _MusicList:
+  - {fileID: 8300000, guid: 62ed5124a034261489936c33bb323faa, type: 3}
+  - {fileID: 8300000, guid: 27db959f021e542428146832f944f875, type: 3}
+  - {fileID: 8300000, guid: 44f31e0442a603643a091c2c12706406, type: 3}
+  - {fileID: 8300000, guid: 6c84f84932ed8e44a80a57a5e80c91e0, type: 3}
   LastUnlockedLevel: 1
 --- !u!4 &1890959055
 Transform:
@@ -2051,6 +2065,102 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1890959056
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890959053}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &1902100943 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 4430752043326821638, guid: d20aaf8b0c9d30040829ac60f14b09ab, type: 3}
