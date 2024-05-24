@@ -5410,7 +5410,7 @@ Transform:
   - {fileID: 5739593467807927283}
   - {fileID: 8145409410883812781}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1827488977775281850
 Rigidbody2D:
@@ -5983,6 +5983,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: -7321485264753333482, guid: a7f12dffb11c4dc41a08b90375eeb709, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 43b8f4cccb91fa040b0d33f9783b5316, type: 2}
     - target: {fileID: -7321485264753333482, guid: a7f12dffb11c4dc41a08b90375eeb709, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
