@@ -3906,6 +3906,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1711744090}
     m_Modifications:
+    - target: {fileID: 1529209797363563001, guid: 91ddcdfc6b43bb841bb730e610a6b96f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1529209797363563001, guid: 91ddcdfc6b43bb841bb730e610a6b96f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1529209797363563001, guid: 91ddcdfc6b43bb841bb730e610a6b96f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1381011757}
+    - target: {fileID: 1529209797363563001, guid: 91ddcdfc6b43bb841bb730e610a6b96f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1529209797363563001, guid: 91ddcdfc6b43bb841bb730e610a6b96f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetPlayerData
+      objectReference: {fileID: 0}
+    - target: {fileID: 1529209797363563001, guid: 91ddcdfc6b43bb841bb730e610a6b96f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1529209797363563001, guid: 91ddcdfc6b43bb841bb730e610a6b96f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1918494100818252754, guid: 91ddcdfc6b43bb841bb730e610a6b96f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3996,11 +4024,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5694903158590231314, guid: 91ddcdfc6b43bb841bb730e610a6b96f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -2133
+      value: -2051
       objectReference: {fileID: 0}
     - target: {fileID: 5694903158590231314, guid: 91ddcdfc6b43bb841bb730e610a6b96f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 200
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 5694903158590231314, guid: 91ddcdfc6b43bb841bb730e610a6b96f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
