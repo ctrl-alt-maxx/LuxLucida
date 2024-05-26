@@ -1,23 +1,23 @@
 # LUX-LUCIDA
-Lucid Light
 
-=============================================================
-Game Controls:
-=============================================================
 
-A and D to walk left to right
-hold LEFTSHIFT to run
-SPACEBAR or W to jump
-Q to toggle on and off eyes of ra (main light power of lux)
-E to interact with objects
-C to close some of the dialogues
-MOUSE SCROLLWHEEL to select item from inventory
-MOUSE LEFT BUTTON to throw light grenades when selected in the inventory
-ESCAPE to return back to main menu from anywhere in the game
+## =============================================================
+## Game Controls:
+## =============================================================
 
-=============================================================
-Important Notes:
-=============================================================
+- A and D to walk left to right
+- hold LEFTSHIFT to run
+- SPACEBAR or W to jump
+- Q to toggle on and off eyes of ra (main light power of lux)
+- E to interact with objects
+- C to close some of the dialogues
+- MOUSE SCROLLWHEEL to select item from inventory
+- MOUSE LEFT BUTTON to throw light grenades when selected in the inventory
+- ESCAPE to return back to main menu from anywhere in the game
+
+## =============================================================
+## Important Notes:
+## =============================================================
 
 - The first level is a tutorial
 
