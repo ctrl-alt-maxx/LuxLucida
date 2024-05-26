@@ -24,8 +24,9 @@ public class ColorChange : MonoBehaviour
         _Colors.Add(Color.magenta);
         _Colors.Add(Color.white);
         _Colors.Add(Color.black);
-        _PlayerMaterial.SetColor("_Color", _Colors[_CurrentColorIndex]);
+        
         _CurrentColorIndex = _GameState.ColorIndex;
+        _PlayerMaterial.SetColor("_Color", _Colors[_CurrentColorIndex]);
         _Image.color = _Colors[_CurrentColorIndex];
     }
 
@@ -44,5 +45,6 @@ public class ColorChange : MonoBehaviour
         _Image.color = _Colors[_CurrentColorIndex];
         _PlayerMaterial.SetColor("_Color", _Colors[_CurrentColorIndex]);    
         _GameState.ColorIndex = _CurrentColorIndex;
+        _GameState.Save();
     }
 }
